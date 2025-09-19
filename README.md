@@ -40,3 +40,5 @@
 7. Finally, verify your PR:
    - Double-check that it was created on the correct repo
    - Make sure the **source** and **destination branches** are set properly
+
+![pull request review](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-review.png)
