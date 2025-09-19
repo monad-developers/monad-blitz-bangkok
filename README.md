@@ -11,3 +11,9 @@
    - Then click **Create Fork**.
 
 ![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-detail.png)
+
+3. In your fork, you can:
+   - Add your project code
+   - Create new branches
+   - Update the README with project info
+   - Make any other changes you need
