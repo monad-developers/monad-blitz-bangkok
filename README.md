@@ -23,3 +23,7 @@
 4. Once your project is ready for submission, open a **Pull Request (PR)**.
 
 ![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
+
+5. Ensure your PR is targeting the correct repo:
+   - **Base repo:** `monad-developers/monad-blitz-bangkok`
+   - Then click **Create Pull Request**.
