@@ -17,3 +17,5 @@
    - Create new branches
    - Update the README with project info
    - Make any other changes you need
+
+![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
