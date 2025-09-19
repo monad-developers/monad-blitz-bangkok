@@ -9,3 +9,5 @@
 2. Enter your **project name** and a **one-line description**.
    - Make sure you are forking the **main** branch.
    - Then click **Create Fork**.
+
+![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-detail.png)
