@@ -18,11 +18,11 @@
    - Update the README with project info
    - Make any other changes you need
 
-![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
+![example project](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
 
 4. Once your project is ready for submission, open a **Pull Request (PR)**.
 
-![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
+![pull requests](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
 
 5. Ensure your PR is targeting the correct repo:
    - **Base repo:** `monad-developers/monad-blitz-bangkok`
