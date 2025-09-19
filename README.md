@@ -27,3 +27,5 @@
 5. Ensure your PR is targeting the correct repo:
    - **Base repo:** `monad-developers/monad-blitz-bangkok`
    - Then click **Create Pull Request**.
+
+![create pull-request](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/crate-pull-request.png)
