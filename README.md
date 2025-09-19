@@ -34,3 +34,5 @@
    - Use your **project name** as the PR title
    - Write a **detailed description** of your project (include as much info as possible; you can also link to a demo video)
    - Click **Create Pull Request**
+
+![pull request detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-detail.png)
