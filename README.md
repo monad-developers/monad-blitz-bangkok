@@ -21,3 +21,5 @@
 ![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
 
 4. Once your project is ready for submission, open a **Pull Request (PR)**.
+
+![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
