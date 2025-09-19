@@ -36,3 +36,7 @@
    - Click **Create Pull Request**
 
 ![pull request detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-detail.png)
+
+7. Finally, verify your PR:
+   - Double-check that it was created on the correct repo
+   - Make sure the **source** and **destination branches** are set properly
