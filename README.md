@@ -371,8 +371,8 @@ MonadAI/
 
 | Contract | Address | Status | Purpose |
 |----------|---------|--------|---------|
-| **Portfolio Manager** | [`0xYourPortfolioContractAddress`](https://testnet.monadexplorer.com/address/0xYourPortfolioContractAddress) | ✅ **Verified** | Portfolio allocation and rebalancing |
-| **Test USDC** | [`0xYourUSDCContractAddress`](https://testnet.monadexplorer.com/address/0xYourUSDCContractAddress) | ✅ **Verified** | Mock USDC for testing |
+| **Portfolio Manager** | [`0xF76Bb2A92d288f15bF17C405Ae715f8d1cedB058`](https://testnet.monadexplorer.com/address/0xF76Bb2A92d288f15bF17C405Ae715f8d1cedB058) | ✅ **Verified** | Portfolio allocation and rebalancing |
+| **Test USDC** | [`0x2921dbEd807E9ADfF57885a6666d82d6e6596AC2`](https://testnet.monadexplorer.com/address/0x2921dbEd807E9ADfF57885a6666d82d6e6596AC2) | ✅ **Verified** | Mock USDC for testing |
 
 #### 🔍 Contract Verification Details
 - **Network**: Monad Blockchain Testnet (Chain ID: 10143)
