@@ -1,0 +1,3 @@
+[submodule "projects/dca-agent-backend"]
+	path = projects/dca-agent-backend
+	url = https://github.com/apemon/monad-blitz-dca-agent-backend.git
