@@ -4,7 +4,9 @@ import { getDatabase } from "../utils/mongodb";
 export class PollModel {
   private static collection = "polls";
 
-  static async create(poll: Omit<Poll, '_id' | 'createdAt' | 'updatedAt'>): Promise<Poll> {
+  static async create(
+    poll: Omit<Poll, "_id" | "createdAt" | "updatedAt">
+  ): Promise<Poll> {
     const db = getDatabase();
     const collection = db.collection<Poll>(this.collection);
 
@@ -14,7 +16,9 @@ export class PollModel {
       totalVotes: 0,
       yesVotes: 0,
       noVotes: 0,
-      status: poll.status || 'active',
+      likes: 0,
+      dislikes: 0,
+      status: poll.status || "active",
       createdAt: now,
       updatedAt: now,
     };
@@ -36,19 +40,21 @@ export class PollModel {
     const collection = db.collection<Poll>(this.collection);
 
     try {
-      const { ObjectId } = await import('mongodb');
+      const { ObjectId } = await import("mongodb");
       return await collection.findOne({ _id: new ObjectId(id) });
     } catch (error) {
       return null;
     }
   }
 
-  static async findAll(filters: {
-    category?: string;
-    status?: string;
-    limit?: number;
-    offset?: number;
-  } = {}): Promise<{ polls: Poll[]; total: number }> {
+  static async findAll(
+    filters: {
+      category?: string;
+      status?: string;
+      limit?: number;
+      offset?: number;
+    } = {}
+  ): Promise<{ polls: Poll[]; total: number }> {
     const db = getDatabase();
     const collection = db.collection<Poll>(this.collection);
 
@@ -72,7 +78,7 @@ export class PollModel {
         .skip(offset)
         .limit(limit)
         .toArray(),
-      collection.countDocuments(query)
+      collection.countDocuments(query),
     ]);
 
     return { polls, total };
@@ -88,12 +94,15 @@ export class PollModel {
       .toArray();
   }
 
-  static async updateById(id: string, updates: Partial<Poll>): Promise<Poll | null> {
+  static async updateById(
+    id: string,
+    updates: Partial<Poll>
+  ): Promise<Poll | null> {
     const db = getDatabase();
     const collection = db.collection<Poll>(this.collection);
 
     try {
-      const { ObjectId } = await import('mongodb');
+      const { ObjectId } = await import("mongodb");
       const result = await collection.findOneAndUpdate(
         { _id: new ObjectId(id) },
         {
@@ -116,7 +125,7 @@ export class PollModel {
     const collection = db.collection<Poll>(this.collection);
 
     try {
-      const { ObjectId } = await import('mongodb');
+      const { ObjectId } = await import("mongodb");
       const result = await collection.deleteOne({ _id: new ObjectId(id) });
       return result.deletedCount > 0;
     } catch (error) {
@@ -129,19 +138,22 @@ export class PollModel {
     const collection = db.collection<Poll>(this.collection);
 
     const categories = await collection.distinct("category", {
-      category: { $ne: null, $ne: "" }
+      category: { $ne: null, $ne: "" },
     });
 
     return categories.sort();
   }
 
-  static async incrementVotes(id: string, voteType: 'yes' | 'no'): Promise<Poll | null> {
+  static async incrementVotes(
+    id: string,
+    voteType: "yes" | "no"
+  ): Promise<Poll | null> {
     const db = getDatabase();
     const collection = db.collection<Poll>(this.collection);
 
     try {
-      const { ObjectId } = await import('mongodb');
-      const updateField = voteType === 'yes' ? 'yesVotes' : 'noVotes';
+      const { ObjectId } = await import("mongodb");
+      const updateField = voteType === "yes" ? "yesVotes" : "noVotes";
 
       const result = await collection.findOneAndUpdate(
         { _id: new ObjectId(id) },
@@ -171,12 +183,12 @@ export class PollModel {
 
     return await collection
       .find({
-        status: 'active',
+        status: "active",
         $or: [
           { expiresAt: { $exists: false } },
           { expiresAt: null },
-          { expiresAt: { $gt: now } }
-        ]
+          { expiresAt: { $gt: now } },
+        ],
       })
       .sort({ createdAt: -1 })
       .toArray();
@@ -190,12 +202,12 @@ export class PollModel {
 
     const result = await collection.updateMany(
       {
-        status: 'active',
-        expiresAt: { $lte: now }
+        status: "active",
+        expiresAt: { $lte: now },
       },
       {
         $set: {
-          status: 'closed',
+          status: "closed",
           updatedAt: now,
         },
       }

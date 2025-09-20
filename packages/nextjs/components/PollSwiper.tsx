@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { motion, PanInfo, useAnimation } from "framer-motion";
-import { Poll, BetDirection, BettingResult } from "~~/types/poll";
-import { BettingInterface } from "./BettingInterface";
+import React, { useEffect, useRef, useState } from "react";
 import { AuthGuard } from "./AuthGuard";
+import { BettingInterface } from "./BettingInterface";
+import { PanInfo, motion, useAnimation } from "framer-motion";
 import { useAuth } from "~~/hooks/useAuth";
+import { BettingResult, Poll } from "~~/types/poll";
 
 interface PollCardProps {
   poll: Poll;
-  onSwipe: (direction: 'left' | 'right' | 'skip') => void;
+  onSwipe: (direction: "left" | "right" | "skip") => void;
   onBetPlaced: (result: BettingResult) => void;
   isTop: boolean;
 }
@@ -28,11 +28,11 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
       if (offset > 0) {
         // Swipe right - Yes
         controls.start({ x: 1000, rotate: 30, opacity: 0 });
-        setTimeout(() => onSwipe('right'), 150);
+        setTimeout(() => onSwipe("right"), 150);
       } else {
         // Swipe left - No
         controls.start({ x: -1000, rotate: -30, opacity: 0 });
-        setTimeout(() => onSwipe('left'), 150);
+        setTimeout(() => onSwipe("left"), 150);
       }
     } else {
       // Snap back to center
@@ -68,7 +68,7 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
   return (
     <motion.div
       ref={constraintsRef}
-      className={`absolute inset-0 ${isTop ? 'z-10' : 'z-0'}`}
+      className={`absolute inset-0 ${isTop ? "z-10" : "z-0"}`}
       initial={{ scale: isTop ? 1 : 0.95, opacity: isTop ? 1 : 0.8 }}
       animate={controls}
       drag={isTop ? "x" : false}
@@ -77,19 +77,27 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
       whileDrag={{ rotate: 0 }}
       style={{ touchAction: "none" }}
     >
-      <div className={`w-full h-full bg-base-100 rounded-xl shadow-lg border border-base-300 p-6 flex flex-col ${isTop ? 'cursor-grab active:cursor-grabbing' : ''}`}>
+      <div
+        className={`w-full h-full bg-base-100 rounded-xl shadow-lg border border-base-300 p-6 flex flex-col ${isTop ? "cursor-grab active:cursor-grabbing" : ""}`}
+      >
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
           <div className="flex items-center gap-2">
             <span className="px-2 py-1 bg-primary text-primary-content text-xs rounded-full font-medium">
               {poll.category}
             </span>
-            <span className="text-xs text-base-content/60">
-              {getTimeRemaining()}
-            </span>
+            <span className="text-xs text-base-content/60">{getTimeRemaining()}</span>
           </div>
-          <div className="text-xs text-base-content/60">
-            {poll.totalVotes} votes
+          <div className="flex items-center gap-3 text-xs text-base-content/60">
+            <div className="flex items-center gap-1">
+              <span>👍</span>
+              <span>{poll.likes || 0}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <span>👎</span>
+              <span>{poll.dislikes || 0}</span>
+            </div>
+            <div>{poll.totalVotes} votes</div>
           </div>
         </div>
 
@@ -104,7 +112,11 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
         <div className="bg-info/10 dark:bg-info/20 rounded-lg p-3 mb-4 border border-info/20">
           <div className="flex items-center gap-2 text-sm">
             <svg className="w-4 h-4 text-info" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
             </svg>
             <span className="text-info font-medium">Verification:</span>
           </div>
@@ -123,7 +135,7 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
             <div
               className="bg-success h-2 rounded-full transition-all duration-300"
               style={{
-                width: `${poll.odds ? poll.odds.yesPercentage : getYesPercentage()}%`
+                width: `${poll.odds ? poll.odds.yesPercentage : getYesPercentage()}%`,
               }}
             />
           </div>
@@ -149,7 +161,7 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
         {showBetting ? (
           <BettingInterface
             poll={poll}
-            onBetPlaced={(result) => {
+            onBetPlaced={result => {
               onBetPlaced(result);
               setShowBetting(false);
             }}
@@ -159,18 +171,10 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
           <div className="space-y-3">
             {/* Bet/Prediction Toggle */}
             <div className="flex gap-2">
-              <button
-                onClick={() => setShowBetting(true)}
-                className="flex-1 btn btn-primary btn-sm"
-                disabled={!isTop}
-              >
+              <button onClick={() => setShowBetting(true)} className="flex-1 btn btn-primary btn-sm" disabled={!isTop}>
                 💰 Place Bet
               </button>
-              <button
-                onClick={() => onSwipe('skip')}
-                className="btn btn-sm btn-ghost"
-                disabled={!isTop}
-              >
+              <button onClick={() => onSwipe("skip")} className="btn btn-sm btn-ghost" disabled={!isTop}>
                 Skip
               </button>
             </div>
@@ -178,7 +182,7 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
             {/* Traditional Vote Buttons */}
             <div className="flex gap-3">
               <button
-                onClick={() => onSwipe('left')}
+                onClick={() => onSwipe("left")}
                 className="flex-1 btn btn-error btn-outline gap-2"
                 disabled={!isTop}
               >
@@ -189,7 +193,7 @@ const PollCard: React.FC<PollCardProps> = ({ poll, onSwipe, onBetPlaced, isTop }
               </button>
 
               <button
-                onClick={() => onSwipe('right')}
+                onClick={() => onSwipe("right")}
                 className="flex-1 btn btn-success btn-outline gap-2"
                 disabled={!isTop}
               >
@@ -246,9 +250,9 @@ export const PollSwiper: React.FC<PollSwiperProps> = ({ selectedCategory, refres
 
       // Fetch polls with market data and user-specific betting info
       const queryParams = new URLSearchParams({
-        limit: '50',
-        includeMarketData: 'true',
-        ...(user ? { userId: user.uid } : {})
+        limit: "50",
+        includeMarketData: "true",
+        ...(user ? { userId: user.uid } : {}),
       });
 
       const response = await fetch(`/api/polls?${queryParams}`);
@@ -257,11 +261,11 @@ export const PollSwiper: React.FC<PollSwiperProps> = ({ selectedCategory, refres
       if (data.success) {
         setPolls(data.polls);
       } else {
-        setError(data.message || 'Failed to fetch polls');
+        setError(data.message || "Failed to fetch polls");
       }
     } catch (error) {
-      console.error('Error fetching polls:', error);
-      setError('Failed to load polls');
+      console.error("Error fetching polls:", error);
+      setError("Failed to load polls");
     } finally {
       setIsLoading(false);
     }
@@ -294,19 +298,19 @@ export const PollSwiper: React.FC<PollSwiperProps> = ({ selectedCategory, refres
     setCurrentIndex(0);
   }, [selectedCategory]);
 
-  const handleSwipe = async (direction: 'left' | 'right' | 'skip') => {
+  const handleSwipe = async (direction: "left" | "right" | "skip") => {
     const currentPoll = filteredPolls[currentIndex];
 
     console.log(`${direction.toUpperCase()} on poll:`, currentPoll.description);
 
     // Handle swipe-to-bet for left (No) and right (Yes)
-    if ((direction === 'left' || direction === 'right') && user && currentPoll.marketAddress) {
-      const betOnYes = direction === 'right';
+    if ((direction === "left" || direction === "right") && user && currentPoll.marketAddress) {
+      const betOnYes = direction === "right";
 
       try {
         // Check if user already bet on this poll
         if (currentPoll.userBets?.hasVoted) {
-          alert(`You've already bet ${currentPoll.userBets.betOnYes ? 'YES' : 'NO'} on this poll!`);
+          alert(`You've already bet ${currentPoll.userBets.betOnYes ? "YES" : "NO"} on this poll!`);
           setCurrentIndex(prev => prev + 1);
           return;
         }
@@ -327,8 +331,10 @@ export const PollSwiper: React.FC<PollSwiperProps> = ({ selectedCategory, refres
 
         if (result.success) {
           // Show success message
-          const betDirection = betOnYes ? 'YES' : 'NO';
-          alert(`🎉 Bet placed successfully!\n\n💰 ${betDirection} bet on "${currentPoll.description}"\n🔗 TX: ${result.txHash?.substring(0, 10)}...`);
+          const betDirection = betOnYes ? "YES" : "NO";
+          alert(
+            `🎉 Bet placed successfully!\n\n💰 ${betDirection} bet on "${currentPoll.description}"\n🔗 TX: ${result.txHash?.substring(0, 10)}...`,
+          );
 
           // Refresh polls to update betting data
           fetchPolls();
@@ -336,8 +342,48 @@ export const PollSwiper: React.FC<PollSwiperProps> = ({ selectedCategory, refres
           alert(`❌ Bet failed: ${result.message}`);
         }
       } catch (error) {
-        console.error('Swipe bet error:', error);
-        alert(`❌ Error placing bet: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        console.error("Swipe bet error:", error);
+        alert(`❌ Error placing bet: ${error instanceof Error ? error.message : "Unknown error"}`);
+      }
+    }
+
+    // Handle like/dislike swipe actions for polls with Twitter posts
+    if ((direction === "left" || direction === "right") && user && currentPoll.twitterPostId) {
+      const action = direction === "right" ? "like" : "dislike";
+
+      try {
+        // Call swipe action API
+        const response = await fetch("/api/polls/swipe", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pollId: currentPoll._id,
+            action,
+            userId: user.uid,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Show success message
+          const actionText = action === "like" ? "liked" : "disliked";
+          const twitterMessage = result.twitterReplyId
+            ? `\n🐦 Replied to Twitter: ${result.twitterReplyId}`
+            : "\n🐦 Twitter reply failed";
+
+          alert(`👍 Successfully ${actionText} poll!${twitterMessage}`);
+
+          // Refresh polls to update like/dislike counts
+          fetchPolls();
+        } else {
+          alert(`❌ Failed to ${action} poll: ${result.message}`);
+        }
+      } catch (error) {
+        console.error("Swipe action error:", error);
+        alert(`❌ Error ${action}ing poll: ${error instanceof Error ? error.message : "Unknown error"}`);
       }
     }
 
@@ -346,7 +392,7 @@ export const PollSwiper: React.FC<PollSwiperProps> = ({ selectedCategory, refres
   };
 
   const handleBetPlaced = (result: BettingResult) => {
-    console.log('Bet placed:', result);
+    console.log("Bet placed:", result);
 
     // Refresh polls to update with new betting data
     fetchPolls();
@@ -407,18 +453,14 @@ export const PollSwiper: React.FC<PollSwiperProps> = ({ selectedCategory, refres
   }
 
   if (currentIndex >= filteredPolls.length) {
-    const categoryText = selectedCategory && selectedCategory !== "All"
-      ? `in ${selectedCategory}`
-      : "";
+    const categoryText = selectedCategory && selectedCategory !== "All" ? `in ${selectedCategory}` : "";
 
     return (
       <div className="flex items-center justify-center h-full p-8">
         <div className="text-center">
           <div className="text-6xl mb-4">🎉</div>
           <h2 className="text-2xl font-bold mb-2 text-base-content">All caught up!</h2>
-          <p className="text-base-content/70 mb-4">
-            You've reviewed all available polls {categoryText}.
-          </p>
+          <p className="text-base-content/70 mb-4">You've reviewed all available polls {categoryText}.</p>
           <button onClick={resetPolls} className="btn btn-primary">
             Start Over
           </button>
@@ -445,9 +487,10 @@ export const PollSwiper: React.FC<PollSwiperProps> = ({ selectedCategory, refres
         {/* Instructions */}
         <div className="mt-4 text-center">
           <p className="text-sm text-base-content/70">
-            💰 <span className="text-primary font-medium">Place bets</span> or make{" "}
-            <span className="text-success font-medium">Yes</span>/
-            <span className="text-error font-medium">No</span> predictions
+            💰 <span className="text-primary font-medium">Place bets</span>, make{" "}
+            <span className="text-success font-medium">Yes</span>/<span className="text-error font-medium">No</span>{" "}
+            predictions, or <span className="text-info font-medium">like</span>/
+            <span className="text-warning font-medium">dislike</span> polls
           </p>
         </div>
       </div>

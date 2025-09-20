@@ -3,12 +3,12 @@ import { PollModel } from "../models/Poll";
 import { UserModel } from "../models/User";
 import { twitterPostService } from "../services/twitterPost";
 import {
-  ErrorResponse,
+  CategoryListResponse,
   CreatePollRequest,
   CreatePollResponse,
+  ErrorResponse,
   FetchPollsRequest,
   FetchPollsResponse,
-  CategoryListResponse,
   Poll,
 } from "../types";
 
@@ -45,7 +45,10 @@ export async function pollRoutes(fastify: FastifyInstance) {
                   verifierRule: { type: "string" },
                   createdBy: { type: "string" },
                   twitterPostId: { type: "string" },
-                  status: { type: "string", enum: ["active", "closed", "draft"] },
+                  status: {
+                    type: "string",
+                    enum: ["active", "closed", "draft"],
+                  },
                   totalVotes: { type: "number" },
                   yesVotes: { type: "number" },
                   noVotes: { type: "number" },
@@ -90,8 +93,12 @@ export async function pollRoutes(fastify: FastifyInstance) {
         // Verify the access token and get user
         let user;
         try {
-          const { twitterOAuthService } = await import("../services/twitterOAuth");
-          const twitterUser = await twitterOAuthService.verifyAccessToken(accessToken);
+          const { twitterOAuthService } = await import(
+            "../services/twitterOAuth"
+          );
+          const twitterUser = await twitterOAuthService.verifyAccessToken(
+            accessToken
+          );
           user = await UserModel.findByTwitterId(twitterUser.id);
         } catch (error) {
           const errorResponse: ErrorResponse = {
@@ -409,6 +416,213 @@ export async function pollRoutes(fastify: FastifyInstance) {
     }
   );
 
+  // Swipe action endpoint (like/dislike with Twitter reply)
+  fastify.post<{
+    Body: {
+      pollId: string;
+      action: "like" | "dislike";
+      userId: string;
+    };
+    Reply:
+      | {
+          success: boolean;
+          message: string;
+          twitterReplyId?: string;
+        }
+      | ErrorResponse;
+  }>(
+    "/polls/swipe",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["pollId", "action", "userId"],
+          properties: {
+            pollId: { type: "string" },
+            action: { type: "string", enum: ["like", "dislike"] },
+            userId: { type: "string" },
+          },
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              success: { type: "boolean" },
+              message: { type: "string" },
+              twitterReplyId: { type: "string" },
+            },
+          },
+          400: {
+            type: "object",
+            properties: {
+              success: { type: "boolean" },
+              error: { type: "string" },
+              message: { type: "string" },
+            },
+          },
+        },
+      },
+    },
+    async (
+      request: FastifyRequest<{
+        Body: { pollId: string; action: "like" | "dislike"; userId: string };
+      }>,
+      reply: FastifyReply
+    ) => {
+      try {
+        const { pollId, action, userId } = request.body;
+
+        // Find the poll
+        const poll = await PollModel.findById(pollId);
+        if (!poll) {
+          const errorResponse: ErrorResponse = {
+            success: false,
+            error: "POLL_NOT_FOUND",
+            message: "Poll not found",
+          };
+          return reply.code(404).send(errorResponse);
+        }
+
+        // Check if poll has a Twitter post ID, create one if it doesn't exist
+        let createdNewTwitterPost = false;
+        if (!poll.twitterPostId) {
+          try {
+            // Create a Twitter post for this poll first
+            const { twitterPostService } = await import(
+              "../services/twitterPost"
+            );
+            const twitterPostId = await twitterPostService.postPoll(poll);
+
+            // Update poll with the new Twitter post ID
+            await PollModel.updateById(pollId, { twitterPostId });
+            poll.twitterPostId = twitterPostId;
+            createdNewTwitterPost = true;
+
+            console.log(
+              `Created Twitter post for poll ${pollId}: ${twitterPostId}`
+            );
+          } catch (twitterError) {
+            console.error(
+              "Failed to create Twitter post for poll:",
+              twitterError
+            );
+            const errorResponse: ErrorResponse = {
+              success: false,
+              error: "TWITTER_POST_CREATION_FAILED",
+              message: "Failed to create Twitter post for this poll",
+            };
+            return reply.code(500).send(errorResponse);
+          }
+        }
+
+        // Get user information for the reply
+        let user;
+        try {
+          const { PrivyService } = await import("../services/privy");
+          const privyService = new PrivyService();
+          user = await privyService.getUser(userId);
+        } catch (error) {
+          console.error("Error fetching user:", error);
+          // Continue without user info if not available
+        }
+
+        // Create reply text based on action and bet status
+        const actionEmoji = action === "like" ? "👍" : "👎";
+        const actionText = action === "like" ? "liked" : "disliked";
+
+        // Check if user has bet on this poll
+        let betStatus = "";
+        if (poll.marketAddress) {
+          try {
+            const { PrivyService } = await import("../services/privy");
+            const { betMarketService } = await import("../services/betMarket");
+            const privyService = new PrivyService();
+            const wallet = await privyService.getWalletAccount(userId);
+
+            if (wallet) {
+              const userBets = await betMarketService.getUserBets(
+                poll.marketAddress,
+                wallet.address
+              );
+              const hasVoted = parseFloat(userBets.totalAmount) > 0;
+
+              if (hasVoted) {
+                const betOnYes =
+                  parseFloat(userBets.yesAmount) >
+                  parseFloat(userBets.noAmount);
+                betStatus = ` and bet ${betOnYes ? "YES" : "NO"}`;
+              } else {
+                betStatus = " (no bet placed)";
+              }
+            }
+          } catch (error) {
+            console.error("Error checking bet status:", error);
+            betStatus = " (bet status unknown)";
+          }
+        } else {
+          betStatus = " (no betting market)";
+        }
+
+        // Create reply text
+        const replyText = `${actionEmoji} ${actionText} this poll${betStatus}! #BetNad #PollVote`;
+
+        // Reply to the Twitter post
+        let twitterReplyId: string | undefined;
+        try {
+          const { twitterService } = await import("../services/twitter");
+          twitterReplyId = await twitterService.replyToTweet(
+            poll.twitterPostId,
+            replyText
+          );
+        } catch (twitterError) {
+          console.error("Failed to reply to Twitter:", twitterError);
+          // Don't fail the request if Twitter reply fails
+        }
+
+        // Update poll statistics (optional - track likes/dislikes)
+        try {
+          const updateData: any = {
+            updatedAt: new Date(),
+          };
+
+          if (action === "like") {
+            updateData.$inc = { likes: 1 };
+          } else {
+            updateData.$inc = { dislikes: 1 };
+          }
+
+          await PollModel.updateById(pollId, updateData);
+        } catch (updateError) {
+          console.error("Error updating poll statistics:", updateError);
+          // Don't fail the request if stats update fails
+        }
+
+        const response = {
+          success: true,
+          message: `Successfully ${actionText} poll and replied to Twitter${
+            createdNewTwitterPost ? " (created new Twitter post)" : ""
+          }`,
+          twitterReplyId,
+        };
+
+        return reply.code(200).send(response);
+      } catch (error) {
+        console.error("Swipe action error:", error);
+
+        const errorResponse: ErrorResponse = {
+          success: false,
+          error: "SWIPE_ACTION_FAILED",
+          message:
+            error instanceof Error
+              ? error.message
+              : "Failed to process swipe action",
+        };
+
+        return reply.code(500).send(errorResponse);
+      }
+    }
+  );
+
   // Create mock poll (no auth required for testing)
   fastify.post<{
     Body?: any;
@@ -455,109 +669,132 @@ export async function pollRoutes(fastify: FastifyInstance) {
         // Mock poll data templates
         const mockPollTemplates = [
           {
-            description: "Should AI-generated content be clearly labeled on social media?",
+            description:
+              "Should AI-generated content be clearly labeled on social media?",
             category: "Tech",
             verifierRule: "Must be a verified social media user",
           },
           {
-            description: "Will virtual reality replace traditional video conferencing within 3 years?",
+            description:
+              "Will virtual reality replace traditional video conferencing within 3 years?",
             category: "Technology",
             verifierRule: "Must work in tech industry",
           },
           {
-            description: "Should cryptocurrency be accepted as payment in all retail stores?",
+            description:
+              "Should cryptocurrency be accepted as payment in all retail stores?",
             category: "Crypto",
             verifierRule: "Must hold cryptocurrency",
           },
           {
-            description: "Will remote work become permanent for most knowledge workers?",
+            description:
+              "Will remote work become permanent for most knowledge workers?",
             category: "Business",
             verifierRule: "Must be employed full-time",
           },
           {
-            description: "Should online education replace traditional classroom learning?",
+            description:
+              "Should online education replace traditional classroom learning?",
             category: "Education",
             verifierRule: "Must be a student or educator",
           },
           {
-            description: "Will electric vehicles make up 50% of new car sales by 2030?",
+            description:
+              "Will electric vehicles make up 50% of new car sales by 2030?",
             category: "Environment",
             verifierRule: "Must be a licensed driver",
           },
           {
-            description: "Should social media platforms ban political advertising completely?",
+            description:
+              "Should social media platforms ban political advertising completely?",
             category: "Politics",
             verifierRule: "Must be a registered voter",
           },
           {
-            description: "Will lab-grown meat become mainstream within the next decade?",
+            description:
+              "Will lab-grown meat become mainstream within the next decade?",
             category: "Food",
             verifierRule: "Must be a consumer of meat products",
           },
           {
-            description: "Will 'Squid Game' season 2 surpass the popularity of season 1?",
+            description:
+              "Will 'Squid Game' season 2 surpass the popularity of season 1?",
             category: "K-series",
             verifierRule: "Must have watched at least 3 K-dramas",
           },
           {
-            description: "Should K-drama series have mandatory English subtitles for global releases?",
+            description:
+              "Should K-drama series have mandatory English subtitles for global releases?",
             category: "K-series",
             verifierRule: "Must be a K-drama fan",
           },
           {
-            description: "Will BTS members' solo careers be more successful than the group?",
+            description:
+              "Will BTS members' solo careers be more successful than the group?",
             category: "K-series",
             verifierRule: "Must follow Korean entertainment",
           },
           {
-            description: "Should Korean webtoons be the primary source for K-drama adaptations?",
+            description:
+              "Should Korean webtoons be the primary source for K-drama adaptations?",
             category: "K-series",
             verifierRule: "Must read webtoons or watch K-dramas",
           },
           {
-            description: "Will Thai BL dramas become as globally popular as K-dramas by 2026?",
+            description:
+              "Will Thai BL dramas become as globally popular as K-dramas by 2026?",
             category: "Thai-drama",
             verifierRule: "Must have watched Thai dramas",
           },
           {
-            description: "Should Thai dramas focus more on international co-productions?",
+            description:
+              "Should Thai dramas focus more on international co-productions?",
             category: "Thai-drama",
             verifierRule: "Must be familiar with Thai entertainment industry",
           },
           {
-            description: "Will '2gether: The Series' get a season 3 within the next 2 years?",
+            description:
+              "Will '2gether: The Series' get a season 3 within the next 2 years?",
             category: "Thai-drama",
             verifierRule: "Must have watched Thai BL series",
           },
           {
-            description: "Should Thai lakorn (soap operas) modernize their storytelling approach?",
+            description:
+              "Should Thai lakorn (soap operas) modernize their storytelling approach?",
             category: "Thai-drama",
             verifierRule: "Must watch Thai television content",
           },
           {
-            description: "Will Netflix cancel more shows after only one season in 2025?",
+            description:
+              "Will Netflix cancel more shows after only one season in 2025?",
             category: "Netflix",
             verifierRule: "Must have active Netflix subscription",
           },
           {
-            description: "Should Netflix bring back 'Stranger Things' for a 6th season?",
+            description:
+              "Should Netflix bring back 'Stranger Things' for a 6th season?",
             category: "Netflix",
             verifierRule: "Must have watched Stranger Things",
           },
           {
-            description: "Will Netflix's password sharing crackdown increase subscriber numbers?",
+            description:
+              "Will Netflix's password sharing crackdown increase subscriber numbers?",
             category: "Netflix",
             verifierRule: "Must use streaming services",
           },
           {
-            description: "Should Netflix invest more in non-English original content?",
+            description:
+              "Should Netflix invest more in non-English original content?",
             category: "Netflix",
             verifierRule: "Must watch international content on Netflix",
           },
         ];
 
         // Select random template
-        const randomTemplate = mockPollTemplates[Math.floor(Math.random() * mockPollTemplates.length)];
+        const randomTemplate =
+          mockPollTemplates[
+            Math.floor(Math.random() * mockPollTemplates.length)
+          ];
 
         // Create mock user ID (in a real scenario, you'd use actual user authentication)
         const mockUserId = "mock_user_" + Date.now();
@@ -600,11 +837,15 @@ export async function pollRoutes(fastify: FastifyInstance) {
 
         try {
           // First verify if Twitter credentials are valid
-          const isTwitterConfigured = await twitterPostService.verifyCredentials();
+          const isTwitterConfigured =
+            await twitterPostService.verifyCredentials();
 
           if (!isTwitterConfigured) {
-            console.warn("Twitter API credentials not properly configured, skipping Twitter post");
-            twitterMessage = "Mock poll created successfully (Twitter API not configured)";
+            console.warn(
+              "Twitter API credentials not properly configured, skipping Twitter post"
+            );
+            twitterMessage =
+              "Mock poll created successfully (Twitter API not configured)";
           } else {
             // Create a campaign-style Twitter post
             const { config } = await import("../config/env");
@@ -616,32 +857,40 @@ ${poll.description}
 
 📊 Vote now and make your voice heard!
 ✅ Verification: ${poll.verifierRule}
-📱 Category: #${poll.category.replace(/\s+/g, '')}
+📱 Category: #${poll.category.replace(/\s+/g, "")}
 
 👉 Cast your vote: ${pollUrl}
 
-#Poll #${poll.category.replace(/\s+/g, '')}Campaign #YourVoiceMatters`;
+#Poll #${poll.category.replace(/\s+/g, "")}Campaign #YourVoiceMatters`;
 
             console.log("Attempting to post to Twitter:", {
               pollId: poll._id,
               category: poll.category,
-              tweetLength: twitterPost.length
+              tweetLength: twitterPost.length,
             });
 
             // Use Twitter posting service for campaign-style post
-            twitterPostId = await twitterPostService.postPollCampaign(poll, twitterPost);
+            twitterPostId = await twitterPostService.postPollCampaign(
+              poll,
+              twitterPost
+            );
 
             // Update poll with Twitter post ID
             await PollModel.updateById(poll._id!, { twitterPostId });
             poll.twitterPostId = twitterPostId;
 
-            twitterMessage = "Mock poll created and posted to Twitter successfully";
-            console.log("Successfully posted to Twitter:", { twitterPostId, pollId: poll._id });
+            twitterMessage =
+              "Mock poll created and posted to Twitter successfully";
+            console.log("Successfully posted to Twitter:", {
+              twitterPostId,
+              pollId: poll._id,
+            });
           }
         } catch (twitterError) {
           console.error("Failed to post mock poll to Twitter:", twitterError);
           // Don't fail the poll creation if Twitter posting fails
-          twitterMessage = "Mock poll created successfully (Twitter posting failed)";
+          twitterMessage =
+            "Mock poll created successfully (Twitter posting failed)";
         }
 
         const response: CreatePollResponse = {
@@ -658,7 +907,10 @@ ${poll.description}
         const errorResponse: ErrorResponse = {
           success: false,
           error: "MOCK_POLL_CREATION_FAILED",
-          message: error instanceof Error ? error.message : "Failed to create mock poll",
+          message:
+            error instanceof Error
+              ? error.message
+              : "Failed to create mock poll",
         };
 
         return reply.code(500).send(errorResponse);

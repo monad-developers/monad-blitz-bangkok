@@ -100,10 +100,12 @@ export interface Poll {
   verifierRule: string;
   createdBy: string; // User ID
   twitterPostId?: string;
-  status: 'active' | 'closed' | 'draft';
+  status: "active" | "closed" | "draft";
   totalVotes: number;
   yesVotes: number;
   noVotes: number;
+  likes?: number;
+  dislikes?: number;
   createdAt: Date;
   updatedAt: Date;
   expiresAt?: Date;

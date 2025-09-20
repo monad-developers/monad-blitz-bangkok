@@ -9,6 +9,8 @@ export interface Poll {
   totalVotes: number;
   yesVotes: number;
   noVotes: number;
+  likes?: number;
+  dislikes?: number;
   createdAt: string;
   expiresAt?: string;
   status: string;
@@ -65,7 +67,7 @@ export interface CreatePollMarketData {
 }
 
 // Betting action types
-export type BetDirection = 'yes' | 'no';
+export type BetDirection = "yes" | "no";
 
 // Betting result from API
 export interface BettingResult {
@@ -114,8 +116,8 @@ export interface ProfitCalculationResponse {
 
 // Enhanced poll with all betting data populated
 export interface EnhancedPoll extends Poll {
-  marketStats: NonNullable<Poll['marketStats']>;
-  odds: NonNullable<Poll['odds']>;
-  userBets: NonNullable<Poll['userBets']>;
-  profitCalculation: NonNullable<Poll['profitCalculation']>;
+  marketStats: NonNullable<Poll["marketStats"]>;
+  odds: NonNullable<Poll["odds"]>;
+  userBets: NonNullable<Poll["userBets"]>;
+  profitCalculation: NonNullable<Poll["profitCalculation"]>;
 }
