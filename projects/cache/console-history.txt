@@ -1,0 +1,9 @@
+(await dicer.tokenURI?.(1))   // ถ้า mint แล้วถึงจะอ่านได้
+// (await dicer.baseURI?.())  // บาง implementation อาจไม่มีเมธอดนี้
+// ถ้า Dicer มีฟังก์ชัน baseURI()/tokenURI(): ลองอ่าน
+(await dicer.owner())   // ควรเป็น OWNER ที่ใส่ตอน deploy
+const dicer = await ethers.getContractAt("Dicer", "0x630Eb26ce573B9A5f8b8daaF6a97239827541056");
+(await ga.manager())    // ควรเป็น 0xBF8E5B... (GameAssetManager)
+const ga = await ethers.getContractAt("GameAssets", "0x1736d61396E34327a77C67a62280636b7aB0264B");
+(await bank.manager())  // ควรเป็น 0xE68E9a... (GameLogic)
+const bank = await ethers.getContractAt("GameBank", "0xBb2Dc0eE986668513bBA1eA5dCa4b601EFc741cB");
