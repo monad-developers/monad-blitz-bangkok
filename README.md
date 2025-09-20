@@ -1,6 +1,6 @@
 # NadX: Revolutionizing Prediction Markets with Monad
 
-![NadX Banner](https://raw.githubusercontent.com/frongrider2/nadx/refs/heads/main/images/banner.png)
+![NadX Banner](https://raw.githubusercontent.com/frongrider2/nadx/refs/heads/main/images/nadx-banner.png)
 
 https://test-monad.nadx.app
 [![Test URL](https://img.shields.io/badge/Test%20URL-Visit%20Here-blue)](https://test-monad.nadx.app)
