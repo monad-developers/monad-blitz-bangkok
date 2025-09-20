@@ -1,0 +1,73 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: betnad-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: betnad
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - betnad-network
+
+  # backend:
+  #   build:
+  #     context: .
+  #     dockerfile: ./packages/backend/Dockerfile
+  #   container_name: betnad-backend
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     NODE_ENV: production
+  #     PORT: 3001
+  #     HOST: 0.0.0.0
+  #     MONGODB_URI: mongodb://admin:password@mongodb:27017/betnad?authSource=admin
+  #     MONGODB_DATABASE: betnad
+  #     CORS_ORIGIN: http://localhost:4000
+  #     # Twitter API credentials (set these in your .env file)
+  #     X_APP_KEY: ${X_APP_KEY}
+  #     X_APP_SECRET: ${X_APP_SECRET}
+  #     X_USER_ACCESS_TOKEN: ${X_USER_ACCESS_TOKEN}
+  #     X_USER_ACCESS_SECRET: ${X_USER_ACCESS_SECRET}
+  #     X_BOT_USER_ID: ${X_BOT_USER_ID}
+  #     # Privy credentials (optional)
+  #     PRIVY_APP_ID: ${PRIVY_APP_ID:-}
+  #     PRIVY_APP_SECRET: ${PRIVY_APP_SECRET:-}
+  #   depends_on:
+  #     - mongodb
+  #   networks:
+  #     - betnad-network
+  #   volumes:
+  #     - ./packages/backend/.env:/app/packages/backend/.env:ro
+
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: ./packages/nextjs/Dockerfile
+  #   container_name: betnad-frontend
+  #   restart: unless-stopped
+  #   ports:
+  #     - "4000:4000"
+  #   environment:
+  #     NODE_ENV: production
+  #     PORT: 4000
+  #     NEXT_PUBLIC_API_URL: http://localhost:3001
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - betnad-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  betnad-network:
+    driver: bridge
