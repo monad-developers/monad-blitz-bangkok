@@ -1,0 +1,520 @@
+{
+  "address": "0x28334A579f4d13C1b36b31564cd5faAF1B8fDDf8",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_eventId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_marketId",
+          "type": "uint256"
+        }
+      ],
+      "name": "bet",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_eventId",
+          "type": "uint256"
+        }
+      ],
+      "name": "claim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "events",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "start",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "end",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum EventStatus",
+          "name": "status",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalPool",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalParticipants",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "resolvedId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_eventId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        }
+      ],
+      "name": "getBetDetails",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum BetStatus",
+          "name": "status",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reward",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_eventId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getEventStatus",
+      "outputs": [
+        {
+          "internalType": "enum EventStatus",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_eventId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_resolvedId",
+          "type": "uint256"
+        }
+      ],
+      "name": "resolve",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalClaimed",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x7da39c153ca59fe14506e2b4c45f68e0655f7788738db2650f4abc13c263b4b2",
+  "receipt": {
+    "to": null,
+    "from": "0x80eb76D99E17141b9eDc4C52A78C5E285C04890c",
+    "contractAddress": "0x28334A579f4d13C1b36b31564cd5faAF1B8fDDf8",
+    "transactionIndex": 7,
+    "gasUsed": "653638",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000020000000000000000000800000000000000080000000000000000400000000000000000100000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000200000000000020000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x646aa316e2324a2d14c98fbee249e7adf87b816a5367a40fc262cc26b601f979",
+    "transactionHash": "0x7da39c153ca59fe14506e2b4c45f68e0655f7788738db2650f4abc13c263b4b2",
+    "logs": [
+      {
+        "transactionIndex": 7,
+        "blockNumber": 38308191,
+        "transactionHash": "0x7da39c153ca59fe14506e2b4c45f68e0655f7788738db2650f4abc13c263b4b2",
+        "address": "0x28334A579f4d13C1b36b31564cd5faAF1B8fDDf8",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x00000000000000000000000080eb76d99e17141b9edc4c52a78c5e285c04890c"
+        ],
+        "data": "0x",
+        "logIndex": 13,
+        "blockHash": "0x646aa316e2324a2d14c98fbee249e7adf87b816a5367a40fc262cc26b601f979"
+      }
+    ],
+    "blockNumber": 38308191,
+    "cumulativeGasUsed": "6338796",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 3,
+  "solcInputHash": "f03cf248b48a97638064bc43d14b2208",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_marketId\",\"type\":\"uint256\"}],\"name\":\"bet\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"}],\"name\":\"claim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"events\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"start\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"end\",\"type\":\"uint256\"},{\"internalType\":\"enum EventStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"totalPool\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalParticipants\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"resolvedId\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_account\",\"type\":\"address\"}],\"name\":\"getBetDetails\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"marketId\",\"type\":\"uint256\"},{\"internalType\":\"enum BetStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"reward\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"}],\"name\":\"getEventStatus\",\"outputs\":[{\"internalType\":\"enum EventStatus\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_resolvedId\",\"type\":\"uint256\"}],\"name\":\"resolve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalClaimed\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}]},\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/NadxPrediction.sol\":\"NadxPrediction\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {Context} from \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * The initial owner is set to the address provided by the deployer. This can\\n * later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    /**\\n     * @dev The caller account is not authorized to perform an operation.\\n     */\\n    error OwnableUnauthorizedAccount(address account);\\n\\n    /**\\n     * @dev The owner is not a valid owner account. (eg. `address(0)`)\\n     */\\n    error OwnableInvalidOwner(address owner);\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.\\n     */\\n    constructor(address initialOwner) {\\n        if (initialOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(initialOwner);\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        if (owner() != _msgSender()) {\\n            revert OwnableUnauthorizedAccount(_msgSender());\\n        }\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby disabling any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        if (newOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\"},\"contracts/NadxPrediction.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\n\\nenum EventStatus { TRADING, RESOLVED }\\n\\nenum BetStatus { PENDING, WIN , LOSE ,CLAIMED }\\n\\ncontract NadxPrediction is Ownable {\\n    constructor() Ownable(msg.sender) {}\\n\\n    uint256 public totalPool;\\n    uint256 public totalClaimed;\\n\\n    struct Event {\\n        uint256 id;\\n        uint256 start;\\n        uint256 end;\\n        EventStatus status;\\n        uint256 totalPool;\\n        uint256 totalParticipants;\\n        mapping(address => Bet) bets;\\n        uint256 resolvedId;\\n    }\\n\\n    struct Bet {\\n        address user;\\n        uint256 amount;\\n        uint256 marketId;\\n        BetStatus status;\\n        uint256 reward;\\n    }\\n\\n    mapping(uint256 => Event) public events;\\n\\n    modifier onlyTrading(uint256 _eventId) {\\n        require(events[_eventId].status == EventStatus.TRADING, \\\"Event is not trading\\\");\\n        _;\\n    }\\n\\n    modifier onlyResolved(uint256 _eventId) {\\n        require(events[_eventId].status == EventStatus.RESOLVED, \\\"Event is not resolved\\\");\\n        _;\\n    }\\n\\n    modifier notClaimed(uint256 _eventId) {\\n        require(events[_eventId].bets[msg.sender].status != BetStatus.CLAIMED, \\\"Bet already claimed\\\");\\n        _;\\n    }\\n\\n    modifier canClaim(uint256 _eventId) {\\n        require(events[_eventId].bets[msg.sender].status == BetStatus.WIN, \\\"Bet already claimed\\\");\\n        _;\\n    }\\n\\n    function bet(uint256 _eventId, uint256 _marketId) public payable onlyTrading(_eventId) {\\n        uint256 amount = msg.value;\\n        Bet storage userBet = events[_eventId].bets[msg.sender];\\n\\n        if (userBet.status == BetStatus.PENDING) {\\n            userBet.amount += amount;\\n        } else {\\n            events[_eventId].bets[msg.sender] = Bet(msg.sender, amount, _marketId, BetStatus.PENDING, 0);\\n            events[_eventId].totalParticipants++;\\n        }\\n        events[_eventId].totalPool += amount;\\n    }\\n\\n    function resolve(uint256 _eventId, uint256 _resolvedId) public onlyOwner onlyTrading(_eventId) {\\n        Event storage eventToResolve = events[_eventId];\\n        eventToResolve.status = EventStatus.RESOLVED;\\n        eventToResolve.resolvedId = _resolvedId;\\n\\n        for (uint256 i = 0; i < eventToResolve.totalParticipants; i++) {\\n            Bet storage userBet = events[_eventId].bets[msg.sender];\\n            if (userBet.marketId == _resolvedId) {\\n                userBet.reward = eventToResolve.totalPool * userBet.amount / eventToResolve.totalPool;\\n\\n               userBet.status = BetStatus.WIN;\\n            } else {\\n               userBet.status = BetStatus.LOSE;\\n            }\\n        }\\n\\n    }\\n\\n    function claim(uint256 _eventId) public onlyResolved(_eventId) canClaim(_eventId) notClaimed(_eventId) {\\n        Bet storage userBet = events[_eventId].bets[msg.sender];\\n        uint256 amount = userBet.reward;\\n\\n        payable(msg.sender).transfer(amount);\\n        userBet.status = BetStatus.CLAIMED;\\n    }\\n\\n\\n    function getBetDetails(uint256 _eventId, address _account) public view returns (uint256 marketId, BetStatus status, uint256 reward) {\\n        Bet storage userBet = events[_eventId].bets[_account];\\n        return (userBet.marketId, userBet.status, userBet.reward);\\n    }\\n\\n    function getEventStatus(uint256 _eventId) public view returns (EventStatus) {\\n        return events[_eventId].status;\\n    }\\n}\\n\",\"keccak256\":\"0x285d6e5a1426a286731a113f7f43398d5478fdc4a234d9025c94d6d0a955f491\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50338061003757604051631e4fbdf760e01b81526000600482015260240160405180910390fd5b61004081610046565b50610096565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b610a46806100a56000396000f3fe60806040526004361061009c5760003560e01c80638da5cb5b116100645780638da5cb5b146101a5578063cd60cdbc146101cd578063d1691a6f14610239578063d54ad2a114610259578063ecfb49a31461027d578063f2fde38b1461029357600080fd5b80630b791430146100a1578063379607f51461011a5780633dcec13e1461013c5780636ffcc7191461017d578063715018a614610190575b600080fd5b3480156100ad57600080fd5b506100fe6100bc36600461084a565b6003602081905260009182526040909120805460018201546002830154938301546004840154600585015460079095015493959294929360ff90921692909187565b604051610111979695949392919061088d565b60405180910390f35b34801561012657600080fd5b5061013a61013536600461084a565b6102b3565b005b34801561014857600080fd5b5061017061015736600461084a565b6000908152600360208190526040909120015460ff1690565b60405161011191906108cd565b61013a61018b3660046108e1565b610483565b34801561019c57600080fd5b5061013a61064a565b3480156101b157600080fd5b506000546040516001600160a01b039091168152602001610111565b3480156101d957600080fd5b5061022a6101e836600461091f565b60008281526003602081815260408084206001600160a01b038616855260060190915290912060028101549181015460049091015460ff909116909250925092565b6040516101119392919061094b565b34801561024557600080fd5b5061013a6102543660046108e1565b61065e565b34801561026557600080fd5b5061026f60025481565b604051908152602001610111565b34801561028957600080fd5b5061026f60015481565b34801561029f57600080fd5b5061013a6102ae366004610973565b61078f565b8060016000828152600360208190526040909120015460ff1660018111156102dd576102dd610863565b146103275760405162461bcd60e51b8152602060048201526015602482015274115d995b9d081a5cc81b9bdd081c995cdbdb1d9959605a1b60448201526064015b60405180910390fd5b816001600082815260036020818152604080842033855260060190915290912081015460ff169081111561035d5761035d610863565b146103a05760405162461bcd60e51b815260206004820152601360248201527210995d08185b1c9958591e4818db185a5b5959606a1b604482015260640161031e565b826003600082815260036020818152604080842033855260060190915290912081015460ff16908111156103d6576103d6610863565b036104195760405162461bcd60e51b815260206004820152601360248201527210995d08185b1c9958591e4818db185a5b5959606a1b604482015260640161031e565b600084815260036020908152604080832033808552600690910190925280832060048101549151909391929183156108fc02918491818181858888f1935050505015801561046b573d6000803e3d6000fd5b50506003908101805460ff1916909117905550505050565b81600080828152600360208190526040909120015460ff1660018111156104ac576104ac610863565b146104f05760405162461bcd60e51b81526020600482015260146024820152734576656e74206973206e6f742074726164696e6760601b604482015260640161031e565b60008381526003602090815260408083203384526006019091528120349160038083015460ff169081111561052757610527610863565b0361054b578181600101600082825461054091906109ab565b9091555061061d9050565b6040805160a0810182523381526020810184905290810185905260608101600081526000602091820181905287815260038083526040808320338452600601845291829020845181546001600160a01b0319166001600160a01b0390911617815592840151600180850191909155918401516002840155606084015183820180549193909260ff199092169184908111156105e8576105e8610863565b0217905550608091909101516004909101556000858152600360205260408120600501805491610617836109be565b91905055505b6000858152600360205260408120600401805484929061063e9084906109ab565b90915550505050505050565b6106526107cd565b61065c60006107fa565b565b6106666107cd565b81600080828152600360208190526040909120015460ff16600181111561068f5761068f610863565b146106d35760405162461bcd60e51b81526020600482015260146024820152734576656e74206973206e6f742074726164696e6760601b604482015260640161031e565b60008381526003602081905260408220908101805460ff1916600117905560078101849055905b816005015481101561078857600085815260036020908152604080832033845260060190915290206002810154859003610765576004830154600182015461074290826109d7565b61074c91906109ee565b600482015560038101805460ff19166001179055610775565b60038101805460ff191660021790555b5080610780816109be565b9150506106fa565b5050505050565b6107976107cd565b6001600160a01b0381166107c157604051631e4fbdf760e01b81526000600482015260240161031e565b6107ca816107fa565b50565b6000546001600160a01b0316331461065c5760405163118cdaa760e01b815233600482015260240161031e565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b60006020828403121561085c57600080fd5b5035919050565b634e487b7160e01b600052602160045260246000fd5b6002811061088957610889610863565b9052565b878152602081018790526040810186905260e081016108af6060830187610879565b8460808301528360a08301528260c083015298975050505050505050565b602081016108db8284610879565b92915050565b600080604083850312156108f457600080fd5b50508035926020909101359150565b80356001600160a01b038116811461091a57600080fd5b919050565b6000806040838503121561093257600080fd5b8235915061094260208401610903565b90509250929050565b838152606081016004841061096257610962610863565b602082019390935260400152919050565b60006020828403121561098557600080fd5b61098e82610903565b9392505050565b634e487b7160e01b600052601160045260246000fd5b808201808211156108db576108db610995565b6000600182016109d0576109d0610995565b5060010190565b80820281158282048414176108db576108db610995565b600082610a0b57634e487b7160e01b600052601260045260246000fd5b50049056fea26469706673582212208de5b5c9aa835472ed80fbfbfd70114c107d01976abe447eb882bfac37d784d864736f6c63430008140033",
+  "deployedBytecode": "0x60806040526004361061009c5760003560e01c80638da5cb5b116100645780638da5cb5b146101a5578063cd60cdbc146101cd578063d1691a6f14610239578063d54ad2a114610259578063ecfb49a31461027d578063f2fde38b1461029357600080fd5b80630b791430146100a1578063379607f51461011a5780633dcec13e1461013c5780636ffcc7191461017d578063715018a614610190575b600080fd5b3480156100ad57600080fd5b506100fe6100bc36600461084a565b6003602081905260009182526040909120805460018201546002830154938301546004840154600585015460079095015493959294929360ff90921692909187565b604051610111979695949392919061088d565b60405180910390f35b34801561012657600080fd5b5061013a61013536600461084a565b6102b3565b005b34801561014857600080fd5b5061017061015736600461084a565b6000908152600360208190526040909120015460ff1690565b60405161011191906108cd565b61013a61018b3660046108e1565b610483565b34801561019c57600080fd5b5061013a61064a565b3480156101b157600080fd5b506000546040516001600160a01b039091168152602001610111565b3480156101d957600080fd5b5061022a6101e836600461091f565b60008281526003602081815260408084206001600160a01b038616855260060190915290912060028101549181015460049091015460ff909116909250925092565b6040516101119392919061094b565b34801561024557600080fd5b5061013a6102543660046108e1565b61065e565b34801561026557600080fd5b5061026f60025481565b604051908152602001610111565b34801561028957600080fd5b5061026f60015481565b34801561029f57600080fd5b5061013a6102ae366004610973565b61078f565b8060016000828152600360208190526040909120015460ff1660018111156102dd576102dd610863565b146103275760405162461bcd60e51b8152602060048201526015602482015274115d995b9d081a5cc81b9bdd081c995cdbdb1d9959605a1b60448201526064015b60405180910390fd5b816001600082815260036020818152604080842033855260060190915290912081015460ff169081111561035d5761035d610863565b146103a05760405162461bcd60e51b815260206004820152601360248201527210995d08185b1c9958591e4818db185a5b5959606a1b604482015260640161031e565b826003600082815260036020818152604080842033855260060190915290912081015460ff16908111156103d6576103d6610863565b036104195760405162461bcd60e51b815260206004820152601360248201527210995d08185b1c9958591e4818db185a5b5959606a1b604482015260640161031e565b600084815260036020908152604080832033808552600690910190925280832060048101549151909391929183156108fc02918491818181858888f1935050505015801561046b573d6000803e3d6000fd5b50506003908101805460ff1916909117905550505050565b81600080828152600360208190526040909120015460ff1660018111156104ac576104ac610863565b146104f05760405162461bcd60e51b81526020600482015260146024820152734576656e74206973206e6f742074726164696e6760601b604482015260640161031e565b60008381526003602090815260408083203384526006019091528120349160038083015460ff169081111561052757610527610863565b0361054b578181600101600082825461054091906109ab565b9091555061061d9050565b6040805160a0810182523381526020810184905290810185905260608101600081526000602091820181905287815260038083526040808320338452600601845291829020845181546001600160a01b0319166001600160a01b0390911617815592840151600180850191909155918401516002840155606084015183820180549193909260ff199092169184908111156105e8576105e8610863565b0217905550608091909101516004909101556000858152600360205260408120600501805491610617836109be565b91905055505b6000858152600360205260408120600401805484929061063e9084906109ab565b90915550505050505050565b6106526107cd565b61065c60006107fa565b565b6106666107cd565b81600080828152600360208190526040909120015460ff16600181111561068f5761068f610863565b146106d35760405162461bcd60e51b81526020600482015260146024820152734576656e74206973206e6f742074726164696e6760601b604482015260640161031e565b60008381526003602081905260408220908101805460ff1916600117905560078101849055905b816005015481101561078857600085815260036020908152604080832033845260060190915290206002810154859003610765576004830154600182015461074290826109d7565b61074c91906109ee565b600482015560038101805460ff19166001179055610775565b60038101805460ff191660021790555b5080610780816109be565b9150506106fa565b5050505050565b6107976107cd565b6001600160a01b0381166107c157604051631e4fbdf760e01b81526000600482015260240161031e565b6107ca816107fa565b50565b6000546001600160a01b0316331461065c5760405163118cdaa760e01b815233600482015260240161031e565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b60006020828403121561085c57600080fd5b5035919050565b634e487b7160e01b600052602160045260246000fd5b6002811061088957610889610863565b9052565b878152602081018790526040810186905260e081016108af6060830187610879565b8460808301528360a08301528260c083015298975050505050505050565b602081016108db8284610879565b92915050565b600080604083850312156108f457600080fd5b50508035926020909101359150565b80356001600160a01b038116811461091a57600080fd5b919050565b6000806040838503121561093257600080fd5b8235915061094260208401610903565b90509250929050565b838152606081016004841061096257610962610863565b602082019390935260400152919050565b60006020828403121561098557600080fd5b61098e82610903565b9392505050565b634e487b7160e01b600052601160045260246000fd5b808201808211156108db576108db610995565b6000600182016109d0576109d0610995565b5060010190565b80820281158282048414176108db576108db610995565b600082610a0b57634e487b7160e01b600052601260045260246000fd5b50049056fea26469706673582212208de5b5c9aa835472ed80fbfbfd70114c107d01976abe447eb882bfac37d784d864736f6c63430008140033",
+  "devdoc": {
+    "errors": {
+      "OwnableInvalidOwner(address)": [
+        {
+          "details": "The owner is not a valid owner account. (eg. `address(0)`)"
+        }
+      ],
+      "OwnableUnauthorizedAccount(address)": [
+        {
+          "details": "The caller account is not authorized to perform an operation."
+        }
+      ]
+    },
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 8,
+        "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 200,
+        "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+        "label": "totalPool",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 202,
+        "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+        "label": "totalClaimed",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 240,
+        "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+        "label": "events",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_uint256,t_struct(Event)223_storage)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_enum(BetStatus)188": {
+        "encoding": "inplace",
+        "label": "enum BetStatus",
+        "numberOfBytes": "1"
+      },
+      "t_enum(EventStatus)183": {
+        "encoding": "inplace",
+        "label": "enum EventStatus",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_struct(Bet)235_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct NadxPrediction.Bet)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Bet)235_storage"
+      },
+      "t_mapping(t_uint256,t_struct(Event)223_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct NadxPrediction.Event)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Event)223_storage"
+      },
+      "t_struct(Bet)235_storage": {
+        "encoding": "inplace",
+        "label": "struct NadxPrediction.Bet",
+        "members": [
+          {
+            "astId": 225,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "user",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 227,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "amount",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 229,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "marketId",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 232,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "status",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_enum(BetStatus)188"
+          },
+          {
+            "astId": 234,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "reward",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "160"
+      },
+      "t_struct(Event)223_storage": {
+        "encoding": "inplace",
+        "label": "struct NadxPrediction.Event",
+        "members": [
+          {
+            "astId": 204,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "id",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 206,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "start",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 208,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "end",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 211,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "status",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_enum(EventStatus)183"
+          },
+          {
+            "astId": 213,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "totalPool",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 215,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "totalParticipants",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 220,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "bets",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_address,t_struct(Bet)235_storage)"
+          },
+          {
+            "astId": 222,
+            "contract": "contracts/NadxPrediction.sol:NadxPrediction",
+            "label": "resolvedId",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

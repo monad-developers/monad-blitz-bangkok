@@ -1,0 +1,5 @@
+export { HomeTab } from "./HomeTab"
+export { AppsTab } from "./AppsTab"
+export { FilesTab } from "./FilesTab"
+export { ProjectsTab } from "./ProjectsTab"
+export { LearnTab } from "./LearnTab"
