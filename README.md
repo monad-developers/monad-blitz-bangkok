@@ -60,6 +60,9 @@
 - [ ] Add push notifications (WalletConnect, Push Protocol)  
 - [ ] Community leaderboards & social trading rooms  
 
+## References
+
+- [Figma](https://www.figma.com/proto/cZdhYwNitqwc3m1G3OSbZz/Untitled?node-id=1-86&p=f&t=q2dGwtIGW9NeL9tJ-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2)
 ---
 
 ## 🚀 Quick Start (Local Dev)
