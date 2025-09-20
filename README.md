@@ -1,44 +1,22 @@
-# Monad Blitz Thailand submission process
+# Monad Blitz Thailand - MuAI
 
-**How to Submit Your Project**
+A platform that allows users to access and choose from multiple AI services without subscribing to every provider, as each AI has its own specialty. Users can also use MON as credit to utilize generative AI services.
 
-1. Visit the [monad-blitz-bangkok repo](https://github.com/monad-developers/monad-blitz-bangkok) and **fork** it.
+## Deposit
+Users can deposit funds into their account via digital wallets, such as Rabbit wallet, MetaMask wallet.
+**Example steps:**
+1. Open the **MuAI** platform.
+2. Make sure you have enough MON in your wallet.
+3. Input the amount of MON you want to deposit or click Max to deposit all available MON.
+4. Click Deposit/Confirm to complete the transaction. or Click Cancel to abort.
 
-![fork repo](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-repository.png)
+## Withdraw
+Users can withdraw funds from their account to their own **digital wallet**.
+**Example steps:**
+1. Open the **MuAI** platform.
+2. Make sure you have enough MON in your wallet.
+3. Input the amount of MON you want to withdraw or click Max to withdraw all available MON.
+4. Click Withdraw/Confirm to complete the transaction. or Click Cancel to abort.
 
-2. Enter your **project name** and a **one-line description**.
-   - Make sure you are forking the **main** branch.
-   - Then click **Create Fork**.
-
-![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-detail.png)
-
-3. In your fork, you can:
-   - Add your project code
-   - Create new branches
-   - Update the README with project info
-   - Make any other changes you need
-
-![example project](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
-
-4. Once your project is ready for submission, open a **Pull Request (PR)**.
-
-![pull requests](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
-
-5. Ensure your PR is targeting the correct repo:
-   - **Base repo:** `monad-developers/monad-blitz-bangkok`
-   - Then click **Create Pull Request**.
-
-![create pull-request](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/crate-pull-request.png)
-
-6. Add details to your PR:
-   - Use your **project name** as the PR title
-   - Write a **detailed description** of your project (include as much info as possible; you can also link to a demo video)
-   - Click **Create Pull Request**
-
-![pull request detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-detail.png)
-
-7. Finally, verify your PR:
-   - Double-check that it was created on the correct repo
-   - Make sure the **source** and **destination branches** are set properly
-
-![pull request review](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-review.png)
+## Pay-per-Use
+The platform supports a **pay-per-use** model for AI services. Users are charged based on usage rather than a fixed subscription.
