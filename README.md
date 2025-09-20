@@ -1,44 +1,24 @@
-# Monad Blitz Thailand submission process
+Dice Party Demo Project for Monad Blitz Hackathon.
+It's smart contract project use in Dice Party Game on WebGL.
 
-**How to Submit Your Project**
 
-1. Visit the [monad-blitz-bangkok repo](https://github.com/monad-developers/monad-blitz-bangkok) and **fork** it.
+GameReward is a Solidity smart contract designed for distributing native MON rewards directly to players, without relying on an external vault or GameBank.
+It can be funded with MON (the native token on Monad) and allows players to claim rewards based on their rank after a game session.
 
-![fork repo](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-repository.png)
+Key Features
+	•	Native MON Rewards – Rewards are distributed directly from the contract’s balance.
+	•	Configurable Reward Table – Owner can set or update reward amounts for each rank.
+	•	Multiple Funding Options – Fund the contract by sending MON directly or calling the fund() function with msg.value.
+	•	Secure Claims – Players call claim(rank) to receive rewards; protected by ReentrancyGuard.
+	•	Admin Tools – Owner can update rewards, set max rank, or withdraw excess MON (rescue).
+	•	Events – Transparent logging for all claims, funding, and configuration changes.
 
-2. Enter your **project name** and a **one-line description**.
-   - Make sure you are forking the **main** branch.
-   - Then click **Create Fork**.
+Default Reward Table
+	•	Rank 1 → 150 MON
+	•	Rank 2 → 50 MON
+	•	Rank 3 → 25 MON
 
-![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-detail.png)
-
-3. In your fork, you can:
-   - Add your project code
-   - Create new branches
-   - Update the README with project info
-   - Make any other changes you need
-
-![example project](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
-
-4. Once your project is ready for submission, open a **Pull Request (PR)**.
-
-![pull requests](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
-
-5. Ensure your PR is targeting the correct repo:
-   - **Base repo:** `monad-developers/monad-blitz-bangkok`
-   - Then click **Create Pull Request**.
-
-![create pull-request](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/crate-pull-request.png)
-
-6. Add details to your PR:
-   - Use your **project name** as the PR title
-   - Write a **detailed description** of your project (include as much info as possible; you can also link to a demo video)
-   - Click **Create Pull Request**
-
-![pull request detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-detail.png)
-
-7. Finally, verify your PR:
-   - Double-check that it was created on the correct repo
-   - Make sure the **source** and **destination branches** are set properly
-
-![pull request review](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-review.png)
+Example Flow
+	1.	Owner deploys the contract and funds it with MON.
+	2.	Players call claim(rank) after a game ends, receiving their reward directly.
+	3.	The contract emits RewardClaimed events for on-chain transparency.
