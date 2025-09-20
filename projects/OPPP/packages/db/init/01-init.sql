@@ -1,0 +1,27 @@
+-- PostgreSQL initialization script
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS transactions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    transaction_hash VARCHAR(66) UNIQUE NOT NULL,
+    block_number BIGINT,
+    amount DECIMAL(36, 18),
+    token_address VARCHAR(42),
+    transaction_type VARCHAR(20),
+    status VARCHAR(20) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample data
+INSERT INTO users (username, email, password_hash) VALUES
+    ('admin', 'admin@sonad.com', '$2b$10$example_hash_here'),
+    ('testuser', 'test@sonad.com', '$2b$10$example_hash_here')
+ON CONFLICT (username) DO NOTHING;
