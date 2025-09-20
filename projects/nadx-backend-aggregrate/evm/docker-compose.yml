@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  evm-testnet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8545:8545"
+    restart: always
+    volumes:
+      - ./data:/data

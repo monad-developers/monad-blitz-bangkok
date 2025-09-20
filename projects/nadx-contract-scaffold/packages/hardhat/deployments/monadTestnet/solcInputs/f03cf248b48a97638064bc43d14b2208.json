@@ -1,0 +1,42 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "@openzeppelin/contracts/access/Ownable.sol": {
+      "content": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)\n\npragma solidity ^0.8.20;\n\nimport {Context} from \"../utils/Context.sol\";\n\n/**\n * @dev Contract module which provides a basic access control mechanism, where\n * there is an account (an owner) that can be granted exclusive access to\n * specific functions.\n *\n * The initial owner is set to the address provided by the deployer. This can\n * later be changed with {transferOwnership}.\n *\n * This module is used through inheritance. It will make available the modifier\n * `onlyOwner`, which can be applied to your functions to restrict their use to\n * the owner.\n */\nabstract contract Ownable is Context {\n    address private _owner;\n\n    /**\n     * @dev The caller account is not authorized to perform an operation.\n     */\n    error OwnableUnauthorizedAccount(address account);\n\n    /**\n     * @dev The owner is not a valid owner account. (eg. `address(0)`)\n     */\n    error OwnableInvalidOwner(address owner);\n\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\n\n    /**\n     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.\n     */\n    constructor(address initialOwner) {\n        if (initialOwner == address(0)) {\n            revert OwnableInvalidOwner(address(0));\n        }\n        _transferOwnership(initialOwner);\n    }\n\n    /**\n     * @dev Throws if called by any account other than the owner.\n     */\n    modifier onlyOwner() {\n        _checkOwner();\n        _;\n    }\n\n    /**\n     * @dev Returns the address of the current owner.\n     */\n    function owner() public view virtual returns (address) {\n        return _owner;\n    }\n\n    /**\n     * @dev Throws if the sender is not the owner.\n     */\n    function _checkOwner() internal view virtual {\n        if (owner() != _msgSender()) {\n            revert OwnableUnauthorizedAccount(_msgSender());\n        }\n    }\n\n    /**\n     * @dev Leaves the contract without owner. It will not be possible to call\n     * `onlyOwner` functions. Can only be called by the current owner.\n     *\n     * NOTE: Renouncing ownership will leave the contract without an owner,\n     * thereby disabling any functionality that is only available to the owner.\n     */\n    function renounceOwnership() public virtual onlyOwner {\n        _transferOwnership(address(0));\n    }\n\n    /**\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\n     * Can only be called by the current owner.\n     */\n    function transferOwnership(address newOwner) public virtual onlyOwner {\n        if (newOwner == address(0)) {\n            revert OwnableInvalidOwner(address(0));\n        }\n        _transferOwnership(newOwner);\n    }\n\n    /**\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\n     * Internal function without access restriction.\n     */\n    function _transferOwnership(address newOwner) internal virtual {\n        address oldOwner = _owner;\n        _owner = newOwner;\n        emit OwnershipTransferred(oldOwner, newOwner);\n    }\n}\n"
+    },
+    "@openzeppelin/contracts/utils/Context.sol": {
+      "content": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)\n\npragma solidity ^0.8.20;\n\n/**\n * @dev Provides information about the current execution context, including the\n * sender of the transaction and its data. While these are generally available\n * via msg.sender and msg.data, they should not be accessed in such a direct\n * manner, since when dealing with meta-transactions the account sending and\n * paying for execution may not be the actual sender (as far as an application\n * is concerned).\n *\n * This contract is only required for intermediate, library-like contracts.\n */\nabstract contract Context {\n    function _msgSender() internal view virtual returns (address) {\n        return msg.sender;\n    }\n\n    function _msgData() internal view virtual returns (bytes calldata) {\n        return msg.data;\n    }\n\n    function _contextSuffixLength() internal view virtual returns (uint256) {\n        return 0;\n    }\n}\n"
+    },
+    "contracts/NadxPrediction.sol": {
+      "content": "//SPDX-License-Identifier: MIT\npragma solidity >=0.8.0 <0.9.0;\n\nimport \"@openzeppelin/contracts/access/Ownable.sol\";\n\nenum EventStatus { TRADING, RESOLVED }\n\nenum BetStatus { PENDING, WIN , LOSE ,CLAIMED }\n\ncontract NadxPrediction is Ownable {\n    constructor() Ownable(msg.sender) {}\n\n    uint256 public totalPool;\n    uint256 public totalClaimed;\n\n    struct Event {\n        uint256 id;\n        uint256 start;\n        uint256 end;\n        EventStatus status;\n        uint256 totalPool;\n        uint256 totalParticipants;\n        mapping(address => Bet) bets;\n        uint256 resolvedId;\n    }\n\n    struct Bet {\n        address user;\n        uint256 amount;\n        uint256 marketId;\n        BetStatus status;\n        uint256 reward;\n    }\n\n    mapping(uint256 => Event) public events;\n\n    modifier onlyTrading(uint256 _eventId) {\n        require(events[_eventId].status == EventStatus.TRADING, \"Event is not trading\");\n        _;\n    }\n\n    modifier onlyResolved(uint256 _eventId) {\n        require(events[_eventId].status == EventStatus.RESOLVED, \"Event is not resolved\");\n        _;\n    }\n\n    modifier notClaimed(uint256 _eventId) {\n        require(events[_eventId].bets[msg.sender].status != BetStatus.CLAIMED, \"Bet already claimed\");\n        _;\n    }\n\n    modifier canClaim(uint256 _eventId) {\n        require(events[_eventId].bets[msg.sender].status == BetStatus.WIN, \"Bet already claimed\");\n        _;\n    }\n\n    function bet(uint256 _eventId, uint256 _marketId) public payable onlyTrading(_eventId) {\n        uint256 amount = msg.value;\n        Bet storage userBet = events[_eventId].bets[msg.sender];\n\n        if (userBet.status == BetStatus.PENDING) {\n            userBet.amount += amount;\n        } else {\n            events[_eventId].bets[msg.sender] = Bet(msg.sender, amount, _marketId, BetStatus.PENDING, 0);\n            events[_eventId].totalParticipants++;\n        }\n        events[_eventId].totalPool += amount;\n    }\n\n    function resolve(uint256 _eventId, uint256 _resolvedId) public onlyOwner onlyTrading(_eventId) {\n        Event storage eventToResolve = events[_eventId];\n        eventToResolve.status = EventStatus.RESOLVED;\n        eventToResolve.resolvedId = _resolvedId;\n\n        for (uint256 i = 0; i < eventToResolve.totalParticipants; i++) {\n            Bet storage userBet = events[_eventId].bets[msg.sender];\n            if (userBet.marketId == _resolvedId) {\n                userBet.reward = eventToResolve.totalPool * userBet.amount / eventToResolve.totalPool;\n\n               userBet.status = BetStatus.WIN;\n            } else {\n               userBet.status = BetStatus.LOSE;\n            }\n        }\n\n    }\n\n    function claim(uint256 _eventId) public onlyResolved(_eventId) canClaim(_eventId) notClaimed(_eventId) {\n        Bet storage userBet = events[_eventId].bets[msg.sender];\n        uint256 amount = userBet.reward;\n\n        payable(msg.sender).transfer(amount);\n        userBet.status = BetStatus.CLAIMED;\n    }\n\n\n    function getBetDetails(uint256 _eventId, address _account) public view returns (uint256 marketId, BetStatus status, uint256 reward) {\n        Bet storage userBet = events[_eventId].bets[_account];\n        return (userBet.marketId, userBet.status, userBet.reward);\n    }\n\n    function getEventStatus(uint256 _eventId) public view returns (EventStatus) {\n        return events[_eventId].status;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
