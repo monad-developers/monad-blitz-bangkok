@@ -1,0 +1,41 @@
+{
+  "name": "blitznad-code-arena",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ultimate PvP coding battles on Monad testnet with BlitzNad",
+  "scripts": {
+    "build": "npm run build:contracts && npm run build:frontend && npm run build:backend",
+    "build:contracts": "cd contracts && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "dev": "concurrently \"npm run dev:contracts\" \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:contracts": "cd contracts && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "install:all": "npm install && cd contracts && npm install && cd ../frontend && npm install && cd ../backend && npm install && cd ../shared && npm install",
+    "test": "npm run test:contracts",
+    "test:contracts": "cd contracts && npm run test",
+    "deploy:testnet": "cd contracts && npm run deploy:testnet",
+    "clean": "rm -rf contracts/dist frontend/.next backend/dist"
+  },
+  "workspaces": [
+    "contracts",
+    "frontend", 
+    "backend",
+    "shared"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "keywords": [
+    "blockchain",
+    "gaming", 
+    "coding-challenges",
+    "monad",
+    "pvp",
+    "solidity",
+    "blitznad"
+  ],
+  "author": "BlitzNad Team",
+  "license": "MIT"
+}

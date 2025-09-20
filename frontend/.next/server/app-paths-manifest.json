@@ -1,0 +1,5 @@
+{
+  "/result/page": "app/result/page.js",
+  "/match/[id]/page": "app/match/[id]/page.js",
+  "/lobby/page": "app/lobby/page.js"
+}

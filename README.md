@@ -1,44 +1,64 @@
-# Monad Blitz Thailand submission process
+# ⚡ BlitzNad Code Arena  
 
-**How to Submit Your Project**
+A lightning-fast PvP coding platform built on the Monad testnet (EVM-compatible). Players battle in real-time coding challenges, staking tokens with fair resolution via oracle verifiers and instant on-chain rewards powered by Monad’s high-performance blockchain.  
 
-1. Visit the [monad-blitz-bangkok repo](https://github.com/monad-developers/monad-blitz-bangkok) and **fork** it.
+## 🎯 Overview  
+BlitzNad fuses learning, gaming, and earning by motivating developers to sharpen coding skills, explore smart contract development on Monad, and compete for real rewards in a scalable, low-latency, trustless environment. With Monad’s parallel execution and near-instant finality, BlitzNad delivers a seamless competitive coding experience that traditional platforms can’t match.  
 
-![fork repo](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-repository.png)
+## 🏗️ Architecture  
+BlitzNad/
+├── contracts/ # Smart contracts (Solidity, deployed on Monad)
+│ ├── src/
+│ ├── test/
+│ └── scripts/
+├── frontend/ # Next.js web application
+│ ├── src/
+│ ├── public/
+│ └── components/
+├── backend/ # Oracle service (Node.js)
+│ ├── src/
+│ ├── sandbox/
+│ └── api/
+└── shared/ # Shared types and utilities
+├── types/
+└── utils/
 
-2. Enter your **project name** and a **one-line description**.
-   - Make sure you are forking the **main** branch.
-   - Then click **Create Fork**.
+markdown
+Copy code
 
-![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-detail.png)
+## 🎮 Core Features  
+**Match Modes**  
+- Speed Solve: First correct solution wins  
+- Optimization Battle: Fastest runtime or lowest gas wins (showcasing Monad’s parallel performance)  
+- CTF (Future): Security-focused contract battles  
 
-3. In your fork, you can:
-   - Add your project code
-   - Create new branches
-   - Update the README with project info
-   - Make any other changes you need
+**Smart Contracts**  
+- GameToken (ERC-20): Native staking/reward token $GAME on Monad  
+- Arena Contract: Match lifecycle, escrow, payouts with Monad’s low-latency settlement  
+- Badges (ERC-1155): Skill-based NFTs minted on Monad  
 
-![example project](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
+**Player Features**  
+- Create and join matches with $GAME staking  
+- Submit solutions for oracle-based judging  
+- Earn rewards + on-chain NFT badges  
+- Leaderboards with ELO ranking (anchored on Monad)  
 
-4. Once your project is ready for submission, open a **Pull Request (PR)**.
+## 🛠️ Tech Stack  
+- Smart Contracts: Solidity, Hardhat, OpenZeppelin, deployed to Monad  
+- Frontend: Next.js, React, Tailwind CSS, wagmi/viem (Monad integration)  
+- Backend: Node.js, TypeScript, Docker sandbox, ethers.js  
+- Database: SQLite (for logs, rankings)  
+- Storage: IPFS/Pinata for prompts and test cases  
+- Blockchain: Monad testnet (EVM-compatible, high throughput, low latency)  
 
-![pull requests](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
+## 📊 Monetization  
+- Protocol fee (2.5% per match)  
+- Premium membership → exclusive coding arenas  
+- Sponsored challenges (real-world coding tasks on Monad)  
+- NFT marketplace for badges & collectibles  
 
-5. Ensure your PR is targeting the correct repo:
-   - **Base repo:** `monad-developers/monad-blitz-bangkok`
-   - Then click **Create Pull Request**.
-
-![create pull-request](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/crate-pull-request.png)
-
-6. Add details to your PR:
-   - Use your **project name** as the PR title
-   - Write a **detailed description** of your project (include as much info as possible; you can also link to a demo video)
-   - Click **Create Pull Request**
-
-![pull request detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-detail.png)
-
-7. Finally, verify your PR:
-   - Double-check that it was created on the correct repo
-   - Make sure the **source** and **destination branches** are set properly
-
-![pull request review](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-review.png)
+## 🎯 Goals  
+- Engagement: Make coding fun, competitive, and rewarding  
+- Education: Hands-on pathway for devs to learn Monad smart contracts  
+- Trustless Rewards: Fair payouts secured by Monad’s EVM-compatible contracts  
+- Scalability: Exploit Monad’s parallel execution and fast finality to enable real-time coding ba

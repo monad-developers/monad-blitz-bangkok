@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Monad Network Addition</title>
+</head>
+<body>
+    <h1>Test Monad Network Addition</h1>
+    <button onclick="addNetwork()">Add Monad Testnet</button>
+    <button onclick="switchNetwork()">Switch to Monad Testnet</button>
+    <div id="result"></div>
+
+    <script>
+        async function addNetwork() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const result = await window.ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [
+                            {
+                                chainId: '0x279F', // 10143 in decimal
+                                chainName: 'Monad Testnet',
+                                nativeCurrency: {
+                                    name: 'Monad',
+                                    symbol: 'MON',
+                                    decimals: 18,
+                                },
+                                rpcUrls: ['https://testnet-rpc.monad.xyz'],
+                                blockExplorerUrls: ['https://testnet.monadexplorer.com/'],
+                            },
+                        ],
+                    });
+                    document.getElementById('result').innerHTML = '✅ Network added successfully!';
+                    console.log('Network added:', result);
+                } catch (error) {
+                    document.getElementById('result').innerHTML = '❌ Error: ' + error.message;
+                    console.error('Error adding network:', error);
+                }
+            } else {
+                document.getElementById('result').innerHTML = '❌ MetaMask not found!';
+            }
+        }
+
+        async function switchNetwork() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const result = await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: '0x279F' }],
+                    });
+                    document.getElementById('result').innerHTML = '✅ Switched to Monad testnet!';
+                    console.log('Switched network:', result);
+                } catch (error) {
+                    if (error.code === 4902) {
+                        // Network not added, try to add it
+                        addNetwork();
+                    } else {
+                        document.getElementById('result').innerHTML = '❌ Error: ' + error.message;
+                        console.error('Error switching network:', error);
+                    }
+                }
+            } else {
+                document.getElementById('result').innerHTML = '❌ MetaMask not found!';
+            }
+        }
+
+        // Check current network
+        async function checkNetwork() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+                    console.log('Current chain ID:', chainId);
+                    console.log('Current chain ID (decimal):', parseInt(chainId, 16));
+                } catch (error) {
+                    console.error('Error checking network:', error);
+                }
+            }
+        }
+
+        // Check on page load
+        window.addEventListener('load', checkNetwork);
+    </script>
+</body>
+</html>

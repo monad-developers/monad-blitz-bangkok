@@ -1,0 +1,26 @@
+{
+  "name": "@blitznad/contracts",
+  "version": "1.0.0",
+  "description": "Smart contracts for BlitzNad Code Arena",
+  "scripts": {
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "dev": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy:testnet": "hardhat run scripts/deploy.ts --network monad_testnet",
+    "verify": "hardhat verify --network monad_testnet",
+    "clean": "hardhat clean"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/hardhat-upgrades": "^1.28.0",
+    "@types/node": "^20.0.0",
+    "hardhat": "^2.17.0",
+    "typescript": "^5.2.0",
+    "dotenv": "^16.3.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.0",
+    "@openzeppelin/contracts-upgradeable": "^4.9.0"
+  }
+}
