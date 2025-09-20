@@ -1,0 +1,39 @@
+{
+  "name": "meme-roulette-lucky-box",
+  "version": "1.0.0",
+  "description": "MemeRoulette Lucky Box - A decentralized gambling game with auto-refill mechanism",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network testnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network mainnet",
+    "verify": "hardhat verify",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:serve": "cd frontend && npm run serve"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "solidity",
+    "defi",
+    "gambling",
+    "meme-tokens"
+  ],
+  "author": "MemeRoulette Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solidity-coverage": "^0.8.5",
+    "chai": "^4.3.7"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "dotenv": "^16.3.1"
+  }
+}
+
