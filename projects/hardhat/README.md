@@ -85,6 +85,16 @@ npm install
 npx hardhat compile
 ```
 
+### Environment Setup
+
+Create a `.env` file:
+
+```env
+PRIVATE_KEY=your_private_key_here
+ALCHEMY_API_KEY=your_alchemy_api_key
+ETHERSCAN_API_KEY=your_etherscan_api_key
+```
+
 ### Network Configuration
 
 The project is configured for Monad Testnet (Chain ID: 10143). Update `hardhat.config.js` for other networks.
@@ -238,6 +248,42 @@ Test coverage includes:
   }
 }
 ```
+
+## 🛠️ Development Scripts
+
+```bash
+# Compile contracts
+npm run build
+
+# Deploy contracts
+npm run deploy
+
+# Publish to thirdweb
+npm run publish
+
+# Debug Merkle tree structure
+node debug_tree_structure.js
+
+# Debug Merkle proofs
+node debug_merkle.js
+```
+
+## 📈 Roadmap
+
+- [ ] **Multi-Chain Support**: Expand beyond Monad to other EVM chains
+- [ ] **Batch Operations**: Bulk claiming and administrative functions
+- [ ] **Advanced Analytics**: On-chain metrics and reporting
+- [ ] **Mobile SDK**: Native mobile integration
+- [ ] **Upgradeable Contracts**: Implement proxy upgrade patterns
+- [ ] **Layer 2 Integration**: Optimize for L2 scaling solutions
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
