@@ -1,44 +1,152 @@
-# Monad Blitz Thailand submission process
+# 🎯 BetNad - Revolutionary Prediction Market Platform
 
-**How to Submit Your Project**
+<div align="center">
+  <h3>Gamified Betting Meets Social Media</h3>
+  <p>Experience prediction markets like never before with Tinder-style swiping and Twitter bot integration</p>
+</div>
 
-1. Visit the [monad-blitz-bangkok repo](https://github.com/monad-developers/monad-blitz-bangkok) and **fork** it.
+## 🚀 What is BetNad?
 
-![fork repo](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-repository.png)
+BetNad is a next-generation prediction market platform that revolutionizes how users interact with betting through innovative, fun mechanics. We're bringing the excitement of prediction markets to the masses with intuitive interfaces and social media integration.
 
-2. Enter your **project name** and a **one-line description**.
-   - Make sure you are forking the **main** branch.
-   - Then click **Create Fork**.
+## ✨ Key Features
 
-![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-detail.png)
+### 🎮 **Tinder-Style Betting Interface**
 
-3. In your fork, you can:
-   - Add your project code
-   - Create new branches
-   - Update the README with project info
-   - Make any other changes you need
+- **Swipe to Bet**: Just like Tinder, swipe right to place a bet, left to pass
+- **Gamified Experience**: Turn betting into an engaging, addictive experience
+- **Quick Decisions**: Make betting decisions in seconds with intuitive gestures
 
-![example project](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
+### 🐦 **Twitter Bot Integration**
 
-4. Once your project is ready for submission, open a **Pull Request (PR)**.
+- **Auto-Post Markets**: When users create new prediction markets, our Twitter bot automatically posts about them
+- **Tweet to Bet**: Tag our Twitter bot directly in tweets to place bets without leaving Twitter
+- **Social Amplification**: Leverage Twitter's reach for organic marketing and user acquisition
 
-![pull requests](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
+### 🎯 **Marketing Advantages**
 
-5. Ensure your PR is targeting the correct repo:
-   - **Base repo:** `monad-developers/monad-blitz-bangkok`
-   - Then click **Create Pull Request**.
+- **Viral Potential**: Every new market becomes a Twitter post, increasing visibility
+- **Social Engagement**: Users can bet and discuss markets directly on Twitter
+- **Community Building**: Create a vibrant community around prediction markets
+- **Organic Growth**: Twitter integration drives user acquisition through social sharing
 
-![create pull-request](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/crate-pull-request.png)
+## 🛠 Technology Stack
 
-6. Add details to your PR:
-   - Use your **project name** as the PR title
-   - Write a **detailed description** of your project (include as much info as possible; you can also link to a demo video)
-   - Click **Create Pull Request**
+- **Frontend**: Next.js with TypeScript
+- **Blockchain**: Ethereum (Monad Testnet)
+- **Smart Contracts**: Solidity with Hardhat
+- **Web3 Integration**: RainbowKit, Wagmi
+- **Backend**: Node.js with TypeScript
+- **Database**: MongoDB
+- **Authentication**: Privy Wallet Integration
 
-![pull request detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-detail.png)
+## 🚀 Getting Started
 
-7. Finally, verify your PR:
-   - Double-check that it was created on the correct repo
-   - Make sure the **source** and **destination branches** are set properly
+### Prerequisites
 
-![pull request review](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-review.png)
+- Node.js (>= v20.18.3)
+- Yarn
+- Git
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd BetNad
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   yarn install
+   ```
+
+3. **Start the frontend**
+
+   ```bash
+   yarn start
+   ```
+
+4. **Start the backend** (in a separate terminal)
+   ```bash
+   cd packages/backend
+   yarn dev
+   ```
+
+Visit `http://localhost:3000` to see the application in action!
+
+**Note**: This project is configured to work with Monad Testnet. Make sure you have a wallet connected to the Monad Testnet network.
+
+## 📱 How It Works
+
+### For Users
+
+1. **Swipe Interface**: Browse prediction markets with a Tinder-like interface
+2. **Quick Betting**: Swipe right to bet, left to pass
+3. **Twitter Integration**: Create markets that auto-post to Twitter
+4. **Social Betting**: Tag our bot on Twitter to place bets
+
+### For Market Creators
+
+1. **Create Markets**: Set up prediction markets with custom parameters
+2. **Auto-Promotion**: Your market automatically gets posted on Twitter
+3. **Social Engagement**: Watch as users engage with your market on social media
+4. **Viral Growth**: Leverage Twitter's reach for maximum visibility
+
+## 🎯 Use Cases
+
+- **Sports Betting**: Predict game outcomes with social engagement
+- **Political Events**: Bet on elections and political developments
+- **Crypto Markets**: Predict cryptocurrency price movements
+- **Entertainment**: Bet on award shows, TV shows, and celebrity events
+- **Custom Events**: Create markets for any predictable outcome
+
+## 🔧 Development
+
+### Project Structure
+
+```
+packages/
+├── hardhat/          # Smart contracts
+├── nextjs/           # Frontend application
+└── backend/          # Backend API and services
+```
+
+### Smart Contracts
+
+- **BetFactory**: Creates and manages prediction markets
+- **BetMarket**: Individual market contracts
+- **GasTank**: Handles gas optimization
+
+### Key Components
+
+- Swipe interface for betting
+- Twitter bot integration
+- Market creation and management
+- User wallet integration
+- Social sharing features
+
+## 🌟 Why BetNad?
+
+- **User-Friendly**: Intuitive interface that anyone can use
+- **Social Integration**: Leverage Twitter for marketing and engagement
+- **Gamification**: Make betting fun and addictive
+- **Viral Growth**: Every market becomes a social media post
+- **Community Driven**: Build engaged communities around prediction markets
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our contributing guidelines for more information.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+<div align="center">
+  <p><strong>Ready to revolutionize prediction markets?</strong></p>
+  <p>Start building with BetNad today! 🚀</p>
+</div>
