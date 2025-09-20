@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    %sapper.head%
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // optional: tweak Tailwind here
+      tailwind.config = {
+        darkMode: 'class',
+        theme: { extend: { colors: { brand: '#7E4BC1' } } }
+      }
+    </script>
+  </head>
+  <body class="bg-white text-zinc-900 dark:bg-black dark:text-white">
+    <!-- Nuxt will inject app here -->
+    %sapper.html%
+  </body>
+</html>
