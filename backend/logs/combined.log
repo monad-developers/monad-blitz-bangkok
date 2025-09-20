@@ -1,0 +1,136 @@
+{"level":"info","message":"🚀 Monad Arena Backend running on port 3001","service":"monad-arena-backend","timestamp":"2025-09-20 14:45:57"}
+{"level":"info","message":"Environment: development","service":"monad-arena-backend","timestamp":"2025-09-20 14:45:57"}
+{"level":"info","message":"Connected to SQLite database: ./monad_arena.db","service":"monad-arena-backend","timestamp":"2025-09-20 14:45:57"}
+{"level":"info","message":"Database tables created/verified","service":"monad-arena-backend","timestamp":"2025-09-20 14:45:57"}
+{"level":"warn","message":"Environment validation warnings:","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: GAME_TOKEN_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: ARENA_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: BADGES_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"warn","message":"  ⚠️  Environment variable PRIVATE_KEY contains placeholder value","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"✅ Environment validation passed","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"🚀 Monad Arena Backend running on port 3001","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Environment: development","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Connected to SQLite database: ./monad_arena.db","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Database tables created/verified","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Database initialized","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Blockchain service initialized","network":"https://testnet-rpc.monad.xyz","oracleAddress":"0xDe7f17c423dEeffd3Fb7d91D99CF0A2d315631a9","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"chainId":"10143","level":"info","message":"Connected to blockchain network:","name":"unknown","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"warn","message":"Contract addresses not found in environment. Running in limited mode.","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"warn","message":"To enable full blockchain functionality:","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"warn","message":"1. Deploy contracts with: cd contracts && npm run deploy:testnet","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"warn","message":"2. Update .env with the deployed contract addresses","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Blockchain service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Judge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Loaded 5 challenges","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"level":"info","message":"Challenge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:26"}
+{"ip":"::1","level":"info","message":"GET /_next/webpack-hmr","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:31","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"ip":"::1","level":"info","message":"GET /_next/webpack-hmr","service":"monad-arena-backend","timestamp":"2025-09-20 14:51:36","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"monad-arena-backend","timestamp":"2025-09-20 14:52:06"}
+{"level":"warn","message":"Environment validation warnings:","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: GAME_TOKEN_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: ARENA_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: BADGES_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"✅ Environment validation passed","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"🚀 Monad Arena Backend running on port 3001","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Environment: development","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Connected to SQLite database: ./monad_arena.db","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Database tables created/verified","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Database initialized","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Blockchain service initialized","network":"https://testnet-rpc.monad.xyz","oracleAddress":"0xDe7f17c423dEeffd3Fb7d91D99CF0A2d315631a9","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"chainId":"10143","level":"info","message":"Connected to blockchain network:","name":"unknown","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"warn","message":"Contract addresses not found in environment. Running in limited mode.","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"warn","message":"To enable full blockchain functionality:","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"warn","message":"1. Deploy contracts with: cd contracts && npm run deploy:testnet","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"warn","message":"2. Update .env with the deployed contract addresses","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Blockchain service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Judge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Loaded 5 challenges","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"level":"info","message":"Challenge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 14:53:14"}
+{"ip":"::1","level":"info","message":"GET /health","service":"monad-arena-backend","timestamp":"2025-09-20 14:54:00","userAgent":"curl/8.7.1"}
+{"ip":"::1","level":"info","message":"GET /health","service":"monad-arena-backend","timestamp":"2025-09-20 14:54:08","userAgent":"curl/8.7.1"}
+{"ip":"::1","level":"info","message":"GET /","service":"monad-arena-backend","timestamp":"2025-09-20 14:55:26","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"SIGTERM received, shutting down gracefully","service":"monad-arena-backend","timestamp":"2025-09-20 14:58:24"}
+{"level":"warn","message":"Environment validation warnings:","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: GAME_TOKEN_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: ARENA_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: BADGES_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"✅ Environment validation passed","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"🚀 Monad Arena Backend running on port 3001","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Environment: development","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Connected to SQLite database: ./monad_arena.db","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Database tables created/verified","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Database initialized","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Blockchain service initialized","network":"https://testnet-rpc.monad.xyz","oracleAddress":"0xDe7f17c423dEeffd3Fb7d91D99CF0A2d315631a9","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"chainId":"10143","level":"info","message":"Connected to blockchain network:","name":"unknown","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"warn","message":"Contract addresses not found in environment. Running in limited mode.","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"warn","message":"To enable full blockchain functionality:","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"warn","message":"1. Deploy contracts with: cd contracts && npm run deploy:testnet","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"warn","message":"2. Update .env with the deployed contract addresses","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Blockchain service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Judge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Loaded 5 challenges","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"Challenge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:12"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:29"}
+{"level":"warn","message":"Environment validation warnings:","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: GAME_TOKEN_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: ARENA_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: BADGES_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"✅ Environment validation passed","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"🚀 Monad Arena Backend running on port 3001","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Environment: development","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Connected to SQLite database: ./monad_arena.db","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Database tables created/verified","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Database initialized","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Blockchain service initialized","network":"https://testnet-rpc.monad.xyz","oracleAddress":"0xDe7f17c423dEeffd3Fb7d91D99CF0A2d315631a9","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"chainId":"10143","level":"info","message":"Connected to blockchain network:","name":"unknown","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"warn","message":"Contract addresses not found in environment. Running in limited mode.","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"warn","message":"To enable full blockchain functionality:","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"warn","message":"1. Deploy contracts with: cd contracts && npm run deploy:testnet","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"warn","message":"2. Update .env with the deployed contract addresses","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Blockchain service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Judge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Loaded 5 challenges","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"level":"info","message":"Challenge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:42"}
+{"ip":"::1","level":"info","message":"GET /health","service":"monad-arena-backend","timestamp":"2025-09-20 15:05:57","userAgent":"curl/8.7.1"}
+{"level":"warn","message":"Environment validation warnings:","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: GAME_TOKEN_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: ARENA_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: BADGES_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"✅ Environment validation passed","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"🚀 Monad Arena Backend running on port 3001","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Environment: development","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Connected to SQLite database: ./monad_arena.db","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Database tables created/verified","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Database initialized","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Blockchain service initialized","network":"https://testnet-rpc.monad.xyz","oracleAddress":"0xDe7f17c423dEeffd3Fb7d91D99CF0A2d315631a9","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"chainId":"10143","level":"info","message":"Connected to blockchain network:","name":"unknown","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"warn","message":"Contract addresses not found in environment. Running in limited mode.","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"warn","message":"To enable full blockchain functionality:","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"warn","message":"1. Deploy contracts with: cd contracts && npm run deploy:testnet","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"warn","message":"2. Update .env with the deployed contract addresses","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Blockchain service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Judge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Loaded 5 challenges","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"Challenge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 16:45:26"}
+{"level":"info","message":"SIGTERM received, shutting down gracefully","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:25"}
+{"level":"warn","message":"Environment validation warnings:","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: GAME_TOKEN_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: ARENA_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"warn","message":"  ⚠️  Optional environment variable not set: BADGES_CONTRACT_ADDRESS","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"info","message":"✅ Environment validation passed","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"info","message":"🚀 Monad Arena Backend running on port 3001","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"info","message":"Environment: development","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"info","message":"Connected to SQLite database: ./monad_arena.db","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"info","message":"Database tables created/verified","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"info","message":"Database initialized","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"level":"info","message":"Blockchain service initialized","network":"https://testnet-rpc.monad.xyz","oracleAddress":"0xDe7f17c423dEeffd3Fb7d91D99CF0A2d315631a9","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:27"}
+{"chainId":"10143","level":"info","message":"Connected to blockchain network:","name":"unknown","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"warn","message":"Contract addresses not found in environment. Running in limited mode.","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"warn","message":"To enable full blockchain functionality:","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"warn","message":"1. Deploy contracts with: cd contracts && npm run deploy:testnet","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"warn","message":"2. Update .env with the deployed contract addresses","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"info","message":"Blockchain service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"info","message":"Judge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"info","message":"Loaded 5 challenges","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"info","message":"Challenge service initialized","service":"monad-arena-backend","timestamp":"2025-09-20 16:46:28"}
+{"level":"info","message":"SIGTERM received, shutting down gracefully","service":"monad-arena-backend","timestamp":"2025-09-20 17:22:16"}
