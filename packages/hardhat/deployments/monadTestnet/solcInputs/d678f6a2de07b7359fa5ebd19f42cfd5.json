@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/WhoIsThis.sol": {
+      "content": "// SPDX-License-Identifier: ISC\r\npragma solidity >=0.8.0 <0.9.0;\r\n\r\ninterface IERC20 {\r\n    function transfer(address to, uint256 amount) external returns (bool);\r\n    function balanceOf(address account) external view returns (uint256);\r\n    function mint(address receiver, uint256 amount) external;\r\n}\r\n\r\ncontract WhoIsThis {\r\n    struct Report {\r\n        uint256 id;\r\n        string title;\r\n        uint256 good;\r\n        uint256 bad;\r\n        address[] voters;\r\n        uint256 voterCount;\r\n        address reporter;\r\n        bool reporterClaimed;\r\n        mapping(address => bool) voterClaimed;\r\n    }\r\n\r\n    uint256 reportCount = 0;\r\n    Report[] reports;\r\n\r\n    IERC20 public immutable WITH_TOKEN;\r\n    uint256 public constant REPORTER_REWARD = 5 * 10**18; // 5 WITH\r\n    uint256 public constant VOTER_REWARD = 1 * 10**18; // 1 WITH\r\n    uint256 public constant MIN_VOTERS_FOR_REWARD = 2;\r\n\r\n    constructor(address _withToken) {\r\n        WITH_TOKEN = IERC20(_withToken);\r\n    }\r\n\r\n    function report(string memory _title) external {\r\n        Report storage newReport = reports.push();\r\n        newReport.id = reportCount;\r\n        newReport.title = _title;\r\n        newReport.good = 0;\r\n        newReport.bad = 0;\r\n        newReport.voterCount = 0;\r\n        newReport.reporter = msg.sender;\r\n        newReport.reporterClaimed = false;\r\n\r\n        reportCount++;\r\n    }\r\n\r\n    function vote(uint256 _reportId, bool _isGood) external {\r\n        require(_reportId < reports.length, \"Invalid report ID\");\r\n        Report storage reportItem = reports[_reportId];\r\n\r\n        // Check if user has already voted\r\n        for (uint256 i = 0; i < reportItem.voters.length; i++) {\r\n            require(reportItem.voters[i] != msg.sender, \"Already voted\");\r\n        }\r\n\r\n        // Add vote\r\n        if (_isGood) {\r\n            reportItem.good++;\r\n        } else {\r\n            reportItem.bad++;\r\n        }\r\n\r\n        // Record voter\r\n        reportItem.voters.push(msg.sender);\r\n        reportItem.voterCount++;\r\n    }\r\n\r\n    function claimReporterReward(uint256 _reportId) external {\r\n        require(_reportId < reports.length, \"Invalid report ID\");\r\n        Report storage reportItem = reports[_reportId];\r\n\r\n        require(msg.sender == reportItem.reporter, \"Not the reporter\");\r\n        require(reportItem.voterCount >= MIN_VOTERS_FOR_REWARD, \"Not enough voters\");\r\n        require(!reportItem.reporterClaimed, \"Already claimed\");\r\n\r\n        reportItem.reporterClaimed = true;\r\n        WITH_TOKEN.mint(msg.sender, REPORTER_REWARD);\r\n    }\r\n\r\n    function claimVoterReward(uint256 _reportId) external {\r\n        require(_reportId < reports.length, \"Invalid report ID\");\r\n        Report storage reportItem = reports[_reportId];\r\n\r\n        // Check if sender is a voter\r\n        bool isVoter = false;\r\n        for (uint256 i = 0; i < reportItem.voters.length; i++) {\r\n            if (reportItem.voters[i] == msg.sender) {\r\n                isVoter = true;\r\n                break;\r\n            }\r\n        }\r\n        require(isVoter, \"Not a voter for this report\");\r\n        require(reportItem.voterCount >= MIN_VOTERS_FOR_REWARD, \"Not enough voters\");\r\n        require(!reportItem.voterClaimed[msg.sender], \"Already claimed\");\r\n\r\n        reportItem.voterClaimed[msg.sender] = true;\r\n        WITH_TOKEN.mint(msg.sender, VOTER_REWARD);\r\n    }\r\n\r\n    function getReportCount() external view returns (uint256) {\r\n        return reports.length;\r\n    }\r\n\r\n    function getReport(uint256 _reportId) external view returns (\r\n        uint256 id,\r\n        string memory title,\r\n        uint256 good,\r\n        uint256 bad,\r\n        address[] memory voters,\r\n        uint256 voterCount,\r\n        address reporter,\r\n        bool reporterClaimed\r\n    ) {\r\n        require(_reportId < reports.length, \"Invalid report ID\");\r\n        Report storage reportItem = reports[_reportId];\r\n\r\n        return (\r\n            reportItem.id,\r\n            reportItem.title,\r\n            reportItem.good,\r\n            reportItem.bad,\r\n            reportItem.voters,\r\n            reportItem.voterCount,\r\n            reportItem.reporter,\r\n            reportItem.reporterClaimed\r\n        );\r\n    }\r\n\r\n    function hasVoterClaimed(uint256 _reportId, address _voter) external view returns (bool) {\r\n        require(_reportId < reports.length, \"Invalid report ID\");\r\n        return reports[_reportId].voterClaimed[_voter];\r\n    }\r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
