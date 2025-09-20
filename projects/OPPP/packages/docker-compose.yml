@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: sonad_postgres
+    environment:
+      POSTGRES_DB: sonad_db
+      POSTGRES_USER: sonad_user
+      POSTGRES_PASSWORD: sonad_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+    networks:
+      - sonad_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: sonad_mysql
+    environment:
+      MYSQL_DATABASE: sonad_db
+      MYSQL_USER: sonad_user
+      MYSQL_PASSWORD: sonad_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - sonad_network
+
+  adminer:
+    image: adminer
+    container_name: sonad_adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - sonad_network
+    depends_on:
+      - postgres
+      - mysql
+
+volumes:
+  postgres_data:
+  mysql_data:
+
+networks:
+  sonad_network:
+    driver: bridge
