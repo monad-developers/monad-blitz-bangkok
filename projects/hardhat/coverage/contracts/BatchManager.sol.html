@@ -1,0 +1,1475 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/BatchManager.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> BatchManager.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.53% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>79/81</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">73.33% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>88/120</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">94.12% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>32/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.27% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>107/110</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">109×</span>
+<span class="cline-any cline-yes">109×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">58×</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">99×</span>
+<span class="cline-any cline-yes">97×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">56×</span>
+<span class="cline-any cline-yes">56×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">111×</span>
+<span class="cline-any cline-yes">110×</span>
+<span class="cline-any cline-yes">110×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+&nbsp;
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
+import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
+&nbsp;
+interface IMint1155 {
+    /**
+     * @dev Mints tokens to the specified address
+     * @param account The address to mint tokens to
+     * @param id The token ID to mint
+     * @param amount The amount of tokens to mint
+     * @param data Additional data with no specified format
+     * @param batchId The batch ID to associate with the token
+     */
+    function mint(address account, uint256 id, uint256 amount, bytes memory data, uint256 batchId) external;
+}
+&nbsp;
+interface ISafeMint721 {
+    /**
+     * @dev Safely mints a new token to the specified address
+     * @param to The address to mint the token to
+     * @param batchId The batch ID to associate with the token
+     */
+    function safeMint(address to, uint256 batchId) external;
+}
+&nbsp;
+/**
+ * @title BatchManager
+ * @dev Main contract for managing QR Code batches with Merkle Tree validation
+ */
+contract BatchManager is AccessControl, Pausable, ReentrancyGuard {
+    bytes32 public constant SYSTEM_ADMIN_ROLE = keccak256("SYSTEM_ADMIN_ROLE");
+    bytes32 public constant BATCH_FACTORY_ROLE = keccak256("BATCH_FACTORY_ROLE");
+    
+    // Structs
+    struct Batch {
+        uint256 batchId;
+        address issuer;
+        address nftContract;
+        bytes32 merkleRoot;
+        uint256 totalCodes;
+        uint256 claimedCodes;
+        uint256 expireTime;
+        bool isPaused;
+        bool isNFT721; // true for ERC721, false for ERC1155
+        mapping(bytes32 =&gt; bool) claimedCodeIds; // Use leaf hash as key for gas optimization
+        mapping(bytes32 =&gt; bool) pausedCodeIds; // Use leaf hash as key for gas optimization
+    }
+&nbsp;
+    struct BatchInfo {
+        uint256 batchId;
+        address issuer;
+        address nftContract;
+        bytes32 merkleRoot;
+        uint256 totalCodes;
+        uint256 claimedCodes;
+        uint256 expireTime;
+        bool isPaused;
+        bool isNFT721;
+    }
+&nbsp;
+    // State variables
+    uint256 private _nextBatchId = 1;
+    mapping(uint256 =&gt; Batch) public batches;
+    mapping(address =&gt; bool) public pausedIssuers;
+    mapping(address =&gt; bool) public globalPausedWallets;
+    mapping(uint256 =&gt; mapping(address =&gt; bool)) public batchPausedWallets;
+    mapping(address =&gt; uint256[]) public issuerBatches;
+    mapping(address =&gt; uint256) public walletNonces; // Nonce for each wallet
+    
+    // TrustedSigner variables
+    mapping(address =&gt; bool) public trustedSigners;
+    mapping(bytes32 =&gt; bool) public usedSignatures;
+&nbsp;
+    // Events
+    event BatchCreated(
+        uint256 indexed batchId,
+        address indexed issuer,
+        address indexed nftContract,
+        bytes32 merkleRoot,
+        uint256 totalCodes,
+        bool isNFT721
+    );
+    
+    event CodeClaimed(
+        uint256 indexed batchId,
+        string indexed codeId,
+        address indexed claimer
+    );
+    
+    event BatchPaused(uint256 indexed batchId, bool isPaused);
+    event IssuerPaused(address indexed issuer, bool isPaused);
+    event WalletPaused(address indexed wallet, uint256 indexed batchId, bool isPaused, bool isGlobal);
+    event CodePaused(uint256 indexed batchId, string indexed codeId, bool isPaused);
+    event BatchExpireTimeSet(uint256 indexed batchId, uint256 expireTime);
+    event BatchAdminAdded(uint256 indexed batchId, address indexed admin);
+    event BatchAdminRemoved(uint256 indexed batchId, address indexed admin);
+    event TrustedSignerAdded(address indexed signer);
+    event TrustedSignerRemoved(address indexed signer);
+    event SignatureVerified(uint256 indexed batchId, address indexed claimer, address indexed signer);
+    event WalletNonceIncremented(address indexed wallet, uint256 newNonce);
+    event BatchFactorySet(address indexed batchFactory);
+    event BatchFactoryRemoved(address indexed batchFactory);
+&nbsp;
+    constructor() {
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(SYSTEM_ADMIN_ROLE, msg.sender);
+    }
+&nbsp;
+    // Modifiers
+<span class="fstat-no" title="function not covered" >    modifier onlyBatchOwnerOrAdmin(uint256 batchId) {</span>
+<span class="cstat-no" title="statement not covered" >        require(_isBatchOwnerOrAdmin(batchId, msg.sender), "Not batch owner or admin")</span>;
+        _;
+    }
+&nbsp;
+    modifier onlySystemAdminOrBatchOwnerOrAdmin(uint256 batchId) {
+        require(
+            hasRole(SYSTEM_ADMIN_ROLE, msg.sender) || _isBatchOwnerOrAdmin(batchId, msg.sender),
+            "Not authorized"
+        );
+        _;
+    }
+&nbsp;
+    modifier batchExists(uint256 batchId) {
+        require(batchId &gt; 0 &amp;&amp; batchId &lt; _nextBatchId, "Batch does not exist");
+        _;
+    }
+&nbsp;
+    modifier notPausedIssuer(address issuer) {
+        require(!pausedIssuers[issuer], "Issuer is paused");
+        _;
+    }
+&nbsp;
+    modifier notPausedWallet(address wallet, uint256 batchId) {
+        require(
+            !globalPausedWallets[wallet] &amp;&amp; !batchPausedWallets[batchId][wallet],
+            "Wallet is paused"
+        );
+        _;
+    }
+&nbsp;
+    // Internal functions
+    function _isBatchOwnerOrAdmin(uint256 batchId, address account) internal view returns (bool) {
+        return batches[batchId].issuer == account || 
+               hasRole(_getBatchAdminRole(batchId), account);
+    }
+&nbsp;
+    function _getBatchAdminRole(uint256 batchId) internal pure returns (bytes32) {
+        return keccak256(abi.encodePacked("BATCH_ADMIN_ROLE", batchId));
+    }
+&nbsp;
+    function _verifyBackendSignature(
+        uint256 batchId,
+        bytes32 codeHash,
+        address to,
+        uint256 nftType,
+        uint256 tokenId,
+        uint256 nonce,
+        uint256 deadline,
+        bytes memory signature
+    ) internal returns (address signer) {
+        require(block.timestamp &lt;= deadline, "Signature expired");
+        
+        // Create the message hash according to the specified format
+        bytes32 messageHash = keccak256(abi.encodePacked(
+            batchId,
+            codeHash,
+            to,
+            nftType,
+            tokenId,
+            nonce,
+            deadline
+        ));
+        
+        // Create Ethereum signed message hash
+        bytes32 ethSignedMessageHash = keccak256(abi.encodePacked(
+            "\x19Ethereum Signed Message:\n32",
+            messageHash
+        ));
+        
+        // Prevent signature replay
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(!usedSignatures[ethSignedMessageHash], "Signature already used");
+        usedSignatures[ethSignedMessageHash] = true;
+        
+        // Recover signer
+        signer = ECDSA.recover(ethSignedMessageHash, signature);
+        require(trustedSigners[signer], "Invalid signer");
+        
+        return signer;
+    }
+&nbsp;
+&nbsp;
+&nbsp;
+    // Batch creation (called by BatchFactory)
+    function createBatch(
+        address issuer,
+        address nftContract,
+        bytes32 merkleRoot,
+        uint256 totalCodes,
+        uint256 expireTime,
+        bool isNFT721
+    ) external onlyRole(BATCH_FACTORY_ROLE) <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant <span class="missing-if-branch" title="else path not taken" >E</span>whenNotPaused notPausedIssuer(issuer) returns (uint256) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(issuer != address(0), "Invalid issuer");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(nftContract != address(0), "Invalid NFT contract");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(merkleRoot != bytes32(0), "Invalid merkle root");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(totalCodes &gt; 0, "Total codes must be positive");
+&nbsp;
+        uint256 batchId = _nextBatchId++;
+        Batch storage batch = batches[batchId];
+        
+        batch.batchId = batchId;
+        batch.issuer = issuer;
+        batch.nftContract = nftContract;
+        batch.merkleRoot = merkleRoot;
+        batch.totalCodes = totalCodes;
+        batch.claimedCodes = 0;
+        batch.expireTime = expireTime;
+        batch.isPaused = false;
+        batch.isNFT721 = isNFT721;
+&nbsp;
+        issuerBatches[issuer].push(batchId);
+&nbsp;
+        emit BatchCreated(batchId, issuer, nftContract, merkleRoot, totalCodes, isNFT721);
+        
+        return batchId;
+    }
+&nbsp;
+    // Claim function
+    function claimCode(
+        uint256 batchId,
+        string memory codeId,
+        uint256 tokenId,
+        uint256 deadline,
+        bytes calldata backendSig,
+        bytes32[] memory merkleProof
+    ) external 
+        <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant
+        whenNotPaused 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+        notPausedIssuer(batches[batchId].issuer)
+        notPausedWallet(msg.sender, batchId)
+    {
+        Batch storage batch = batches[batchId];
+        
+        require(!batch.isPaused, "Batch is paused");
+        require(<span class="branch-0 cbranch-no" title="branch not covered" >batch.expireTime == 0</span> || block.timestamp &lt;= batch.expireTime, "Batch expired");
+        
+        // Calculate leaf hash for gas optimization
+        bytes32 leaf = keccak256(abi.encodePacked(codeId));
+        require(!batch.claimedCodeIds[leaf], "Code already claimed");
+        require(!batch.pausedCodeIds[leaf], "Code is paused");
+&nbsp;
+        // Verify merkle proof
+        require(MerkleProof.verify(merkleProof, batch.merkleRoot, leaf), "Invalid merkle proof");
+&nbsp;
+        // Validate token parameters based on batch type
+        uint256 nftType;
+        if (batch.isNFT721) {
+            require(tokenId == 0, "TokenId must be 0 for ERC721");
+            nftType = 0;
+        } else {
+            <span class="missing-if-branch" title="else path not taken" >E</span>require(tokenId &gt; 0, "TokenId must be &gt; 0 for ERC1155");
+            nftType = 1;
+        }
+&nbsp;
+        // Verify backend signature using wallet nonce
+        bytes32 codeHash = keccak256(abi.encodePacked(codeId));
+        uint256 nonce = walletNonces[msg.sender]; // Use wallet-specific nonce
+        
+        address signer = _verifyBackendSignature(
+            batchId,
+            codeHash,
+            msg.sender,
+            nftType,
+            tokenId,
+            nonce,
+            deadline,
+            backendSig
+        );
+&nbsp;
+        // Mark as claimed
+        batch.claimedCodeIds[leaf] = true;
+        batch.claimedCodes++;
+        
+        // Increment wallet nonce
+        walletNonces[msg.sender]++;
+&nbsp;
+        emit CodeClaimed(batchId, codeId, msg.sender);
+        emit SignatureVerified(batchId, msg.sender, signer);
+        emit WalletNonceIncremented(msg.sender, walletNonces[msg.sender]);
+&nbsp;
+        // Mint NFT (1 NFT per claim)
+        if (batch.isNFT721) {
+            ISafeMint721(batch.nftContract).safeMint(msg.sender, batchId);
+        } else {
+            IMint1155(batch.nftContract).mint(
+                msg.sender,
+                tokenId, // Use provided tokenId for ERC1155
+                1, // Mint 1 token per claim
+                "",
+                batchId
+            );
+        }
+    }
+&nbsp;
+    // Admin functions
+    function pauseBatch(uint256 batchId, bool isPaused) 
+        external 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+        onlySystemAdminOrBatchOwnerOrAdmin(batchId) 
+    {
+        batches[batchId].isPaused = isPaused;
+        emit BatchPaused(batchId, isPaused);
+    }
+&nbsp;
+    function pauseIssuer(address issuer, bool isPaused) external onlyRole(SYSTEM_ADMIN_ROLE) {
+        pausedIssuers[issuer] = isPaused;
+        emit IssuerPaused(issuer, isPaused);
+    }
+&nbsp;
+    function pauseWalletGlobally(address wallet, bool isPaused) external <span class="missing-if-branch" title="else path not taken" >E</span>onlyRole(SYSTEM_ADMIN_ROLE) {
+        globalPausedWallets[wallet] = isPaused;
+        emit WalletPaused(wallet, 0, isPaused, true);
+    }
+&nbsp;
+    function pauseWalletInBatch(uint256 batchId, address wallet, bool isPaused) 
+        external 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+        <span class="missing-if-branch" title="else path not taken" >E</span>onlySystemAdminOrBatchOwnerOrAdmin(batchId) 
+    {
+        batchPausedWallets[batchId][wallet] = isPaused;
+        emit WalletPaused(wallet, batchId, isPaused, false);
+    }
+&nbsp;
+    function pauseCodeInBatch(uint256 batchId, string memory codeId, bool isPaused) 
+        external 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+        <span class="missing-if-branch" title="else path not taken" >E</span>onlySystemAdminOrBatchOwnerOrAdmin(batchId) 
+    {
+        bytes32 leaf = keccak256(abi.encodePacked(codeId));
+        batches[batchId].pausedCodeIds[leaf] = isPaused;
+        emit CodePaused(batchId, codeId, isPaused);
+    }
+&nbsp;
+    function setBatchExpireTime(uint256 batchId, uint256 expireTime) 
+        external 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+        <span class="missing-if-branch" title="else path not taken" >E</span>onlySystemAdminOrBatchOwnerOrAdmin(batchId) 
+    {
+        batches[batchId].expireTime = expireTime;
+        emit BatchExpireTimeSet(batchId, expireTime);
+    }
+&nbsp;
+    function addBatchAdmin(uint256 batchId, address admin) 
+        external 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+    {
+        require(batches[batchId].issuer == msg.sender, "Only batch owner can add admin");
+        _grantRole(_getBatchAdminRole(batchId), admin);
+        emit BatchAdminAdded(batchId, admin);
+    }
+&nbsp;
+    function removeBatchAdmin(uint256 batchId, address admin) 
+        external 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+    {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(batches[batchId].issuer == msg.sender, "Only batch owner can remove admin");
+        _revokeRole(_getBatchAdminRole(batchId), admin);
+        emit BatchAdminRemoved(batchId, admin);
+    }
+&nbsp;
+    // System admin functions
+    function pause() external <span class="missing-if-branch" title="else path not taken" >E</span>onlyRole(SYSTEM_ADMIN_ROLE) {
+        _pause();
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function unpause() external onlyRole(SYSTEM_ADMIN_ROLE) {</span>
+<span class="cstat-no" title="statement not covered" >        _unpause()</span>;
+    }
+&nbsp;
+    function addTrustedSigner(address signer) external <span class="missing-if-branch" title="else path not taken" >E</span>onlyRole(SYSTEM_ADMIN_ROLE) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(signer != address(0), "Invalid signer address");
+        require(!trustedSigners[signer], "Signer already exists");
+        trustedSigners[signer] = true;
+        emit TrustedSignerAdded(signer);
+    }
+&nbsp;
+    function removeTrustedSigner(address signer) external <span class="missing-if-branch" title="else path not taken" >E</span>onlyRole(SYSTEM_ADMIN_ROLE) {
+        require(trustedSigners[signer], "Signer does not exist");
+        trustedSigners[signer] = false;
+        emit TrustedSignerRemoved(signer);
+    }
+&nbsp;
+    function setBatchFactory(address batchFactory) external onlyRole(SYSTEM_ADMIN_ROLE) {
+        require(batchFactory != address(0), "Invalid batch factory address");
+        _grantRole(BATCH_FACTORY_ROLE, batchFactory);
+        emit BatchFactorySet(batchFactory);
+    }
+&nbsp;
+    function removeBatchFactory(address batchFactory) external onlyRole(SYSTEM_ADMIN_ROLE) {
+        _revokeRole(BATCH_FACTORY_ROLE, batchFactory);
+        emit BatchFactoryRemoved(batchFactory);
+    }
+&nbsp;
+    // View functions
+    function getBatchInfo(uint256 batchId) external view batchExists(batchId) returns (BatchInfo memory) {
+        Batch storage batch = batches[batchId];
+        return BatchInfo({
+            batchId: batch.batchId,
+            issuer: batch.issuer,
+            nftContract: batch.nftContract,
+            merkleRoot: batch.merkleRoot,
+            totalCodes: batch.totalCodes,
+            claimedCodes: batch.claimedCodes,
+            expireTime: batch.expireTime,
+            isPaused: batch.isPaused,
+            isNFT721: batch.isNFT721
+        });
+    }
+&nbsp;
+    function isCodeClaimed(uint256 batchId, string memory codeId) 
+        external 
+        view 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+        returns (bool) 
+    {
+        bytes32 leaf = keccak256(abi.encodePacked(codeId));
+        return batches[batchId].claimedCodeIds[leaf];
+    }
+&nbsp;
+    function isCodePaused(uint256 batchId, string memory codeId) 
+        external 
+        view 
+        <span class="missing-if-branch" title="else path not taken" >E</span>batchExists(batchId) 
+        returns (bool) 
+    {
+        bytes32 leaf = keccak256(abi.encodePacked(codeId));
+        return batches[batchId].pausedCodeIds[leaf];
+    }
+&nbsp;
+    function getIssuerBatches(address issuer) external view returns (uint256[] memory) {
+        return issuerBatches[issuer];
+    }
+&nbsp;
+    function getCurrentBatchId() external view returns (uint256) {
+        return _nextBatchId - 1;
+    }
+&nbsp;
+    function isBatchAdmin(uint256 batchId, address account) external view returns (bool) {
+        return hasRole(_getBatchAdminRole(batchId), account);
+    }
+&nbsp;
+    function isTrustedSigner(address signer) external view returns (bool) {
+        return trustedSigners[signer];
+    }
+&nbsp;
+    function getWalletNonce(address wallet) external view returns (uint256) {
+        return walletNonces[wallet];
+    }
+&nbsp;
+    function isBatchFactory(address account) external view returns (bool) {
+        return hasRole(BATCH_FACTORY_ROLE, account);
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Sep 19 2025 21:43:27 GMT+0700 (Indochina Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

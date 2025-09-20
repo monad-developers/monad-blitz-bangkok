@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-09-20T04:16:06.513Z",
+  "network": {
+    "name": "monadTestnet",
+    "chainId": "10143"
+  },
+  "deployer": "0x0Bc6bD47003A585649e5b662D2ACED3E6Fd11478",
+  "contracts": {
+    "onceToken": "0x53Af2E544dc9b40c5f3a0D43A667EFFf943f2535",
+    "batchManager": "0x62C3ae5cF6F89FA1D2BB41b6a28cE2F15deF087D",
+    "once721Template": "0xA0b5571e8bfe8C03942e8bb2A50A41F7D8c9C850",
+    "once1155Template": "0xBbabd9568326cD5AF963F4682Ea6c9F1467EE581",
+    "batchFactory": "0x8B3247b9Aa9D7fd3c796F2d518F1C228A820CCb0"
+  },
+  "configuration": {
+    "tokensPerCode": "10",
+    "minCodesPerBatch": "10",
+    "initialSupply": "1000000"
+  }
+}
