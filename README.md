@@ -1,44 +1,68 @@
-# Monad Blitz Thailand submission process
+# Social Trading Detox
 
-**How to Submit Your Project**
+**Social Trading Detox** is a GameFi-powered app designed to help users stay focused and reduce smartphone addiction while earning rewards. By combining **DeFi trading tools**, **NFT gamification**, and **EIP-7702 delegated execution**, users are incentivized to stay off their devices and let their “monsters” mine rewards.
 
-1. Visit the [monad-blitz-bangkok repo](https://github.com/monad-developers/monad-blitz-bangkok) and **fork** it.
+---
 
-![fork repo](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-repository.png)
+## ✨ Features
 
-2. Enter your **project name** and a **one-line description**.
-   - Make sure you are forking the **main** branch.
-   - Then click **Create Fork**.
+- **EIP-7702 Delegated Execution** — Temporary delegation of wallet actions to policy contracts.  
+- **Stay-Focused Mining** — Rewards for setting a no-touch timer and sticking to it.  
+- **Limit Orders & Auto Swap** — Execute swaps automatically to your wallet once price targets are hit.  
+- **Auto Stake** — Automatically stake rewards into configured vaults.  
+- **Dashboard & Notifications** — Track mining progress, vault balances, and get success notifications.  
+- **NFT Rewards** — Evolving “monster” NFTs that upgrade as you succeed.  
+- **Game Asset Tokenization** — Monsters and in-game items as tradable assets.  
+- **Verifiable Random Function (VRF)** — Mini-games and loot drops with fair randomness.  
 
-![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-detail.png)
+---
 
-3. In your fork, you can:
-   - Add your project code
-   - Create new branches
-   - Update the README with project info
-   - Make any other changes you need
+## 🕹 How It Works
 
-![example project](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
+1. **Login with Web3 Wallet**  
+2. **Select a Monster Egg** and assign a focus task  
+3. **Configure Mining Parameters**  
+   - Token name / target price  
+   - Focus duration (time you won’t touch your phone)  
+4. **Start Focus Session**  
+   - App tracks no-touch duration  
+5. **Outcomes**  
+   - ✅ **Success**: Summarized notification + extra rewards  
+   - ❌ **Fail**: No notification, countdown continues, rewards reduced  
+6. **Return to Dashboard & Vaults** to review performance and assets  
+7. **Monster Upgrades** unlock chances to play mini-games with VRF-based big rewards  
 
-4. Once your project is ready for submission, open a **Pull Request (PR)**.
+---
 
-![pull requests](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
+## 🧱 Smart Contracts
 
-5. Ensure your PR is targeting the correct repo:
-   - **Base repo:** `monad-developers/monad-blitz-bangkok`
-   - Then click **Create Pull Request**.
+- **Mining Contract** — Handles session tracking, reward logic, and penalties  
+- **NFT Contract** — Manages monster eggs, evolutions, and upgrades  
+- **Vault/Auto-Stake Contract** — Stakes earned tokens automatically  
+- **Swap Router** — Executes limit orders and auto-swaps rewards  
+- **Policy (EIP-7702)** — Delegated execution for user-approved actions  
+- **Oracle & VRF (Mocks)** — Mocked locally until integrated with live testnet feeds  
 
-![create pull-request](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/crate-pull-request.png)
+---
 
-6. Add details to your PR:
-   - Use your **project name** as the PR title
-   - Write a **detailed description** of your project (include as much info as possible; you can also link to a demo video)
-   - Click **Create Pull Request**
+## ⚠️ Limitations on Testnets
 
-![pull request detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-detail.png)
+- Current testnets may not have live **oracle feeds** or **VRF services**.  
+- For now, **mock contracts** are used for price feeds and randomness.  
+- This limits completing the **full game loop** on test environments.  
 
-7. Finally, verify your PR:
-   - Double-check that it was created on the correct repo
-   - Make sure the **source** and **destination branches** are set properly
+---
 
-![pull request review](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-review.png)
+## 📊 Roadmap
+
+- [ ] Integrate live Chainlink Oracles & VRF  
+- [ ] Expand dashboard analytics  
+- [ ] Add push notifications (WalletConnect, Push Protocol)  
+- [ ] Community leaderboards & social trading rooms  
+
+## References
+
+- [Figma](https://www.figma.com/proto/cZdhYwNitqwc3m1G3OSbZz/Untitled?node-id=1-86&p=f&t=q2dGwtIGW9NeL9tJ-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2)
+---
+
+## 🚀 Quick Start (Local Dev)
