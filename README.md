@@ -1,44 +1,28 @@
-# Monad Blitz Thailand submission process
+# NadX: Revolutionizing Prediction Markets with Monad
 
-**How to Submit Your Project**
+![NadX Logo](https://github.com/nadx-app/nadx-frontend/blob/main/public/logo.png)
 
-1. Visit the [monad-blitz-bangkok repo](https://github.com/monad-developers/monad-blitz-bangkok) and **fork** it.
+https://test-monad.nadx.app
+[![Test URL](https://img.shields.io/badge/Test%20URL-Visit%20Here-blue)](https://test-monad.nadx.app)
 
-![fork repo](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-repository.png)
+NadX is a Smart Prediction Aggregator built on Monad, designed to make prediction markets simple, cost-efficient, and accessible to everyone.
 
-2. Enter your **project name** and a **one-line description**.
-   - Make sure you are forking the **main** branch.
-   - Then click **Create Fork**.
+While platforms like Polymarket have proven strong demand and billion-dollar valuations, existing prediction markets remain complex and fragmented:
 
-![fork detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/fork-detail.png)
+- Users must vote Yes/No separately, calculate slippage, and manage liquidity across multiple pools.
 
-3. In your fork, you can:
-   - Add your project code
-   - Create new branches
-   - Update the README with project info
-   - Make any other changes you need
+- Liquidity providers need to split capital, leading to higher costs and inefficiency.
 
-![example project](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/example-project.png)
+- UX is intimidating for new users who just want to make straightforward predictions.
 
-4. Once your project is ready for submission, open a **Pull Request (PR)**.
+NadX solves these barriers by aggregating liquidity and simplifying the experience:
 
-![pull requests](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-requests.png)
+- One-Pool Liquidity: Capital efficiency for LPs, less fragmentation.
 
-5. Ensure your PR is targeting the correct repo:
-   - **Base repo:** `monad-developers/monad-blitz-bangkok`
-   - Then click **Create Pull Request**.
+- Simple UX: Users pick outcomes directly (e.g. “Who will be President?” → choose the candidate, no need to vote No on everyone else).
 
-![create pull-request](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/crate-pull-request.png)
+- Basket Predict: Predict multiple outcomes in a single transaction, with optimized pricing and execution.
 
-6. Add details to your PR:
-   - Use your **project name** as the PR title
-   - Write a **detailed description** of your project (include as much info as possible; you can also link to a demo video)
-   - Click **Create Pull Request**
+- Low Costs with Monad: Sub-cent gas fees and 10,000+ TPS make micro-bets possible and scalable.
 
-![pull request detail](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-detail.png)
-
-7. Finally, verify your PR:
-   - Double-check that it was created on the correct repo
-   - Make sure the **source** and **destination branches** are set properly
-
-![pull request review](https://raw.githubusercontent.com/addicola/monad-blitz-bangkok/refs/heads/main/images/pull-request-review.png)
+With NadX, prediction markets become fast, user-friendly, and inclusive, bridging the gap between advanced DeFi mechanics and mainstream adoption.
